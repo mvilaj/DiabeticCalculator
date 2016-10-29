@@ -1,7 +1,10 @@
 package com.air.foi.diabeticcalculatorapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.air.foi.diabeticcalculatorapp.preferences.CustomPreferencesActivity;
 
 public class MainActivity extends AppCompatActivity {
 

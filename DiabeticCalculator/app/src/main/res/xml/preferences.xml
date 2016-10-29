@@ -5,7 +5,7 @@
         android:key="ime"
         android:title="Ime i prezime"
         android:summary="unesite ime i prezime (obavezno)"
-        android:inputType="number"
+        android:inputType="text"
         />
 
     <EditTextPreference
