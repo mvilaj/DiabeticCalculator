@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="ime"
+        android:title="Ime i prezime"
+        android:summary="unesite ime i prezime (obavezno)"
+        android:inputType="number"
+        />
+
+    <EditTextPreference
+        android:key="tezina"
+        android:title="Težina"
+        android:summary="unesite težinu u kg (obavezno)"
+        android:inputType="number"
+        />
+
+    <ListPreference
+        android:key="kratkodjelujuci"
+        android:title="Kratkodjelujuci inzulin"
+        android:summary="odabertite kratkodjelujuci inzulin (obavezno)"
+        android:entries="@array/kratkodjelujuciArray"
+        android:entryValues="@array/kratkodjelujuciValues"
+        android:defaultValue="2"
+        />
+
+    <ListPreference
+        android:key="dugodjelujuci"
+        android:title="Dugodjelujuci inzulin"
+        android:summary="odabertite dugodjelujuci inzulin (obavezno)"
+        android:entries="@array/dugodjelujuciArray"
+        android:entryValues="@array/dugodjelujuciValues"
+        android:defaultValue="2"
+        />
+</PreferenceScreen>
