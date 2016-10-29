@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="dugodjelujuciArray">
+        <item>Lantus</item>
+        <item>Levimir</item>
+        <item>Humulin NPR</item>
+        <item>Protaphane</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string-array name="dugodjelujuciValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>
