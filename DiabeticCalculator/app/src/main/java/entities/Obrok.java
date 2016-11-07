@@ -1,17 +1,41 @@
 package entities;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
+
+import database.DiabeticCalculatorDb;
 
 /**
  * Created by Mario on 11/6/2016.
  */
 
-public class Obrok {
+@Table(database = DiabeticCalculatorDb.class)
+public class Obrok extends BaseModel{
+
+    @PrimaryKey(autoincrement = true)
+    @Column
     int id;
+
+    @Column
     Date Datum;
+
+    @Column
     double GukPrije;
+
+    @Column
     double GukNakon;
+
+    @Column
     double Ugljikohidrati;
+
+    @Column
+    @ForeignKey(tableClass = TipObroka.class)
+    TipObroka TipObroka;
 
     public Obrok() {
     }

@@ -1,11 +1,24 @@
 package entities;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import database.DiabeticCalculatorDb;
+
 /**
  * Created by Mario on 11/6/2016.
  */
 
-public class TipMjerenja {
+@Table(database = DiabeticCalculatorDb.class)
+public class TipMjerenja extends BaseModel{
+
+    @PrimaryKey(autoincrement = true)
+    @Column
     int id;
+
+    @Column
     String Naziv;
 
     public TipMjerenja() {
