@@ -33,8 +33,8 @@ public class NamirniceObroka extends BaseModel{
     public NamirniceObroka() {
     }
 
-    public NamirniceObroka(int id, double kolicina) {
-        this.id = id;
+    public NamirniceObroka( double kolicina) {
+
         Kolicina = kolicina;
     }
 

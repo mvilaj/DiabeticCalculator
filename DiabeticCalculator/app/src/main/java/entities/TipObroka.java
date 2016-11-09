@@ -24,8 +24,8 @@ public class TipObroka extends BaseModel {
     public TipObroka() {
     }
 
-    public TipObroka(int id, String naziv) {
-        this.id = id;
+    public TipObroka( String naziv) {
+
         Naziv = naziv;
     }
 

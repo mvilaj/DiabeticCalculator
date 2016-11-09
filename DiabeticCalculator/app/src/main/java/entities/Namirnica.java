@@ -26,8 +26,8 @@ public class Namirnica extends BaseModel{
     public Namirnica() {
     }
 
-    public Namirnica(int id, String naziv, double ugljikohidrati) {
-        this.id = id;
+    public Namirnica( String naziv, double ugljikohidrati) {
+
         Naziv = naziv;
         Ugljikohidrati = ugljikohidrati;
     }

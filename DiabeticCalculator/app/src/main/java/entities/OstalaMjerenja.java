@@ -34,8 +34,8 @@ public class OstalaMjerenja extends BaseModel{
     public OstalaMjerenja() {
     }
 
-    public OstalaMjerenja(int id, Date datum, double guk) {
-        this.id = id;
+    public OstalaMjerenja( Date datum, double guk) {
+
         Datum = datum;
         Guk = guk;
     }

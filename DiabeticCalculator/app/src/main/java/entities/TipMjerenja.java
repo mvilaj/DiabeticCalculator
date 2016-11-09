@@ -24,8 +24,8 @@ public class TipMjerenja extends BaseModel{
     public TipMjerenja() {
     }
 
-    public TipMjerenja(int id, String naziv) {
-        this.id = id;
+    public TipMjerenja( String naziv) {
+
         Naziv = naziv;
     }
 
