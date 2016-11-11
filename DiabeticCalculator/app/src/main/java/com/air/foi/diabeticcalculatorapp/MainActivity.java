@@ -1,6 +1,8 @@
 package com.air.foi.diabeticcalculatorapp;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 import entities.DatabaseData;
 import entities.Namirnica;
+import fragment.IzracunFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
             DatabaseData.writeAll();
         }
+
     }
 }

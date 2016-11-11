@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:hint="Unesite količinu ugljikohidrata"
             android:id="@+id/etUgljikohidrati"
-            android:visibility="gone"
             android:inputType="numberDecimal"/>
         <Button
             android:layout_width="wrap_content"
