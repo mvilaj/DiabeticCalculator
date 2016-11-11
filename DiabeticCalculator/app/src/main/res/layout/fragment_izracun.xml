@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.IzracunFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Odaberite tip obroka:"
+            android:id="@+id/tvObrok"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spTipObroka"></Spinner>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite GUK"
+            android:inputType="numberDecimal"
+            android:id="@+id/etGuk"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite količinu ugljikohidrata"
+            android:id="@+id/etUgljikohidrati"
+            android:visibility="gone"
+            android:inputType="numberDecimal"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Izračunaj"
+            android:id="@+id/btnIzracunaj"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>
