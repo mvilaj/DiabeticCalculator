@@ -4,21 +4,26 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_pocetna"
-            android:title="Početna" />
+            android:title="Početna"
+            android:icon="@drawable/ic_action_home_48"/>
 
         <item
             android:id="@+id/nav_statistika"
-            android:title="Statistika" />
+            android:title="Statistika"
+            android:icon="@drawable/ic_action_line_chart_50"/>
 
         <item
             android:id="@+id/nav_unos"
-            android:title="Unos u bazu" />
+            android:title="Unos u bazu"
+            android:icon="@drawable/ic_action_import_48"/>
         <item
             android:id="@+id/nav_podsjetnik"
-            android:title="Podsjetnik" />
+            android:title="Podsjetnik"
+            android:icon="@drawable/ic_action_alarm_clock_48"/>
         <item
             android:id="@+id/nav_profil"
-            android:title="Profil" />
+            android:title="Profil"
+            android:icon="@drawable/ic_action_user_48"/>
     </group>
 
 </menu>
