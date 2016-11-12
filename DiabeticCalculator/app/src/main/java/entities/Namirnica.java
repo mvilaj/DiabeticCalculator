@@ -3,7 +3,10 @@ package entities;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import java.util.List;
 
 import database.DiabeticCalculatorDb;
 
@@ -54,5 +57,13 @@ public class Namirnica extends BaseModel{
 
     public void setUgljikohidrati(double ugljikohidrati) {
         Ugljikohidrati = ugljikohidrati;
+    }
+
+    public List<Namirnica> getNamirnice(){
+
+        List<Namirnica> listaNnamirnica = SQLite.select()
+                .from(Namirnica.class).queryList();
+
+        return listaNnamirnica;
     }
 }

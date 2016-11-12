@@ -3,6 +3,7 @@ package entities;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import database.DiabeticCalculatorDb;
@@ -43,5 +44,13 @@ public class TipObroka extends BaseModel {
 
     public void setNaziv(String naziv) {
         Naziv = naziv;
+    }
+
+    public TipObroka getTipObroka (String naziv){
+        TipObroka tipObroka = SQLite.select()
+                .from(TipObroka.class)
+                .where(TipObroka_Table.Naziv.eq(naziv)).querySingle();
+
+        return tipObroka;
     }
 }

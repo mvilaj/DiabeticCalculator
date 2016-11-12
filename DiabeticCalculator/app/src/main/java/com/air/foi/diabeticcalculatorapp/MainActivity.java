@@ -1,6 +1,8 @@
 package com.air.foi.diabeticcalculatorapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +24,7 @@ import entities.DatabaseData;
 import entities.Namirnica;
 import fragment.IzracunFragment;
 import fragment.TabFragment;
+import fragment.UnosUBazu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,19 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 R.string.app_name);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         mDrawerToggle.syncState();
 
 
         FlowManager.init(new FlowConfig.Builder(this).build());
-
-        List<Namirnica> listaNnamirnica = SQLite.select()
-                .from(Namirnica.class).queryList();
-
-        if (listaNnamirnica.size() > 0){
-        }
-        else {
-
+        Namirnica namirnica = new Namirnica();
+        if (namirnica.getNamirnice().size() == 0){
             DatabaseData.writeAll();
         }
 
@@ -76,26 +72,47 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_podsjetnik:
-                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
                         return true;
                     case R.id.nav_profil:
                         Intent i = new Intent(getApplicationContext(), CustomPreferencesActivity.class);
                         startActivity(i);
                         return true;
                     case R.id.nav_statistika:
-                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
                         return true;
 
                     case R.id.nav_unos:
                         FragmentTransaction fragmentTransaction2 = mFragmentManager.beginTransaction();
-                        //fragmentTransaction2.replace(R.id.containerView,new fragment.UnosUBazu()).commit();
+                        fragmentTransaction2.replace(R.id.containerView,new UnosUBazu()).commit();
                         return true;
                 }
-
                 return true;
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!chechPreferences()){
+            Intent i = new Intent(getApplicationContext(), CustomPreferencesActivity.class);
+            startActivity(i);
+        }
+    }
+
+    private boolean chechPreferences() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (sp.contains("tezina")){
+            if (sp.getString("tezina", null).equals("")){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
 
     }
 }

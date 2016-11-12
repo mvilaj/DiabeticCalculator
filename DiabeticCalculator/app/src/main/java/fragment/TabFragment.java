@@ -2,6 +2,7 @@ package fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,9 +20,8 @@ public class TabFragment extends Fragment {
 
         public static TabLayout tabLayout;
         public static ViewPager viewPager;
-        public static int int_items = 3;
 
-       // @Nullable
+        @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

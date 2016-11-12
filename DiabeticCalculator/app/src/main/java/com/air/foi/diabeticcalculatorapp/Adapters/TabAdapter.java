@@ -14,7 +14,6 @@ import fragment.PocetniFragment;
 
 public class TabAdapter extends FragmentPagerAdapter {
     private String [] tabTitles = {"Home", "Izracun inzulina", "Novo mjerenje"};
-    private String [] tabTitle2 = {"Statistika", "Grafički prikaz", "Dnevnik"};
 
     public TabAdapter(FragmentManager fm) {
         super(fm);
