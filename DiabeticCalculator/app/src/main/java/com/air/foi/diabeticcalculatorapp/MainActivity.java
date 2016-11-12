@@ -8,6 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.preferences.CustomPreferencesActivity;
 import com.raizlabs.android.dbflow.config.FlowConfig;
@@ -19,6 +21,7 @@ import java.util.List;
 import entities.DatabaseData;
 import entities.Namirnica;
 import fragment.IzracunFragment;
+import fragment.TabFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +58,44 @@ public class MainActivity extends AppCompatActivity {
 
             DatabaseData.writeAll();
         }
+
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                mDrawerLayout.closeDrawers();
+
+                switch (item.getItemId()){
+
+                    case R.id.nav_pocetna:
+                        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+                        return true;
+
+                    case R.id.nav_podsjetnik:
+                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.nav_profil:
+                        Intent i = new Intent(getApplicationContext(), CustomPreferencesActivity.class);
+                        startActivity(i);
+                        return true;
+                    case R.id.nav_statistika:
+                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.nav_unos:
+                        FragmentTransaction fragmentTransaction2 = mFragmentManager.beginTransaction();
+                        //fragmentTransaction2.replace(R.id.containerView,new fragment.UnosUBazu()).commit();
+                        return true;
+                }
+
+                return true;
+            }
+        });
+
 
     }
 }
