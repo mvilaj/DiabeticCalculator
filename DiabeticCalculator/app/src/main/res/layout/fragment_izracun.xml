@@ -27,21 +27,55 @@
             android:inputType="numberDecimal"
             android:id="@+id/etGuk"/>
 
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/znam_koli_inu_ugljikohidrata"
+            android:id="@+id/cbPoznatiUgljikohidrati"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Unesite količinu ugljikohidrata"
             android:id="@+id/etUgljikohidrati"
-            android:inputType="numberDecimal"/>
-        <Button
-            android:layout_width="wrap_content"
+            android:inputType="numberDecimal"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Izračunaj"
-            android:id="@+id/btnIzracunaj"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            />
+            android:text="@string/lista_namirnica_u_obroku"
+            android:gravity="center"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:id="@+id/rvNamirnice"></android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Izračunaj"
+                android:id="@+id/btnIzracunaj"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:paddingRight="100dp"
+                android:paddingBottom="100dp"
+                android:id="@+id/fabDodaj"
+
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

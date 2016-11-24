@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +34,7 @@ import java.util.List;
 import entities.NamirniceObroka;
 import entities.Obrok;
 import entities.TipObroka;
-import entities.TipObroka_Table;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,10 +45,13 @@ public class IzracunFragment extends Fragment {
     private EditText etGuk;
     private EditText etUgljikohidrati;
     private Button btnIzracunaj;
+    private FloatingActionButton fabDodaj;
+    private CheckBox cbPoznatiUgljikohidrati;
+    private RecyclerView rvNamirnice;
     String inzulin;
 
     public IzracunFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -75,6 +81,17 @@ public class IzracunFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 izracunaj();
+            }
+        });
+
+        cbPoznatiUgljikohidrati.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbPoznatiUgljikohidrati.isChecked()){
+                    etUgljikohidrati.setVisibility(View.VISIBLE);
+                }else{
+                    etUgljikohidrati.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -123,6 +140,9 @@ public class IzracunFragment extends Fragment {
         etGuk = (EditText) v.findViewById(R.id.etGuk);
         etUgljikohidrati = (EditText) v.findViewById(R.id.etUgljikohidrati);
         btnIzracunaj = (Button) v.findViewById(R.id.btnIzracunaj);
+        fabDodaj = (FloatingActionButton) v.findViewById(R.id.fabDodaj);
+        cbPoznatiUgljikohidrati = (CheckBox) v.findViewById(R.id.cbPoznatiUgljikohidrati);
+        rvNamirnice = (RecyclerView) v.findViewById(R.id.rvNamirnice);
     }
 
 }
