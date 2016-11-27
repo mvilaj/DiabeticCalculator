@@ -38,6 +38,11 @@ public class NamirniceObroka extends BaseModel{
         Kolicina = kolicina;
     }
 
+    public NamirniceObroka( Namirnica namirnica, double kolicina) {
+        this.Namirnica = namirnica;
+        this.Kolicina = kolicina;
+    }
+
     public int getId() {
         return id;
     }

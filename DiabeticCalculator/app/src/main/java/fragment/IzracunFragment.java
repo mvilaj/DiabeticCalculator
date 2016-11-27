@@ -1,6 +1,5 @@
 package fragment;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -23,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.air.foi.diabeticcalculatorapp.NamirniceObrokaDialog;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.controlers.IzracunInzulinaControler;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import entities.Namirnica;
 import entities.NamirniceObroka;
 import entities.Obrok;
 import entities.TipObroka;
@@ -39,7 +40,7 @@ import entities.TipObroka;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IzracunFragment extends Fragment {
+public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.DodanaNamirnicaListener{
 
     private Spinner spTipObroka;
     private EditText etGuk;
@@ -49,6 +50,10 @@ public class IzracunFragment extends Fragment {
     private CheckBox cbPoznatiUgljikohidrati;
     private RecyclerView rvNamirnice;
     String inzulin;
+
+    private Fragment fragment = this;
+
+    private List<NamirniceObroka> listaNamirnica = new ArrayList();
 
     public IzracunFragment() {
 
@@ -92,6 +97,16 @@ public class IzracunFragment extends Fragment {
                 }else{
                     etUgljikohidrati.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        fabDodaj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NamirniceObrokaDialog nod = new NamirniceObrokaDialog();
+                nod.setTargetFragment(fragment, 0);
+                nod.setTargetFragment(fragment,0);
+                nod.show(getActivity().getSupportFragmentManager(), "NOD");
             }
         });
     }
@@ -145,4 +160,12 @@ public class IzracunFragment extends Fragment {
         rvNamirnice = (RecyclerView) v.findViewById(R.id.rvNamirnice);
     }
 
+    @Override
+    public void dodanaNamirnica(String namirnica, String kolicina) {
+
+        Namirnica novaNamirnica = Namirnica.getNamirnicapoImenu(namirnica);
+        NamirniceObroka novaNamirnicaObroka = new NamirniceObroka(novaNamirnica, Double.parseDouble(kolicina));
+        listaNamirnica.add(novaNamirnicaObroka);
+        //rvNamirnice.setAdapter(new NamirniceObrokaRecyclerViewAdapter(listaNamirnica, getContext()));
+    }
 }

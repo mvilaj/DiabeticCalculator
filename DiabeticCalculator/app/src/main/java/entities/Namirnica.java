@@ -59,11 +59,22 @@ public class Namirnica extends BaseModel{
         Ugljikohidrati = ugljikohidrati;
     }
 
-    public List<Namirnica> getNamirnice(){
+    public static List<Namirnica> getNamirnice(){
 
         List<Namirnica> listaNnamirnica = SQLite.select()
                 .from(Namirnica.class).queryList();
 
         return listaNnamirnica;
     }
+
+    public static Namirnica getNamirnicapoImenu (String naziv){
+
+       Namirnica novaNamirnica = SQLite.select()
+                .from(Namirnica.class)
+                .where(Namirnica_Table.Naziv.eq(naziv)).querySingle();
+
+        return novaNamirnica;
+    }
+
+
 }
