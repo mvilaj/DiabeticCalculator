@@ -10,4 +10,6 @@
     <string name="odustani">Odustani</string>
     <string name="namirnica">Namirnica:</string>
     <string name="kolicina">Količina:</string>
+    <string name="odaberite_tip_obroka">Odaberite tip obroka:</string>
+    <string name="kolicina_ugljikohidrata">Unesite količinu ugljikohidrata:</string>
 </resources>

@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.air.foi.diabeticcalculatorapp.Adapters.NamirniceObrokaRecyclerViewAdapter;
 import com.air.foi.diabeticcalculatorapp.NamirniceObrokaDialog;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.controlers.IzracunInzulinaControler;
@@ -49,11 +51,13 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
     private FloatingActionButton fabDodaj;
     private CheckBox cbPoznatiUgljikohidrati;
     private RecyclerView rvNamirnice;
-    String inzulin;
-
+    private String inzulin;
     private Fragment fragment = this;
-
     private List<NamirniceObroka> listaNamirnica = new ArrayList();
+    private double ukupnoUgljikohidrata;
+    private double uneseniUgljikohodrati;
+    private double uneseniGuk;
+    private int kolicinaInzulina;
 
     public IzracunFragment() {
 
@@ -79,6 +83,11 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         }
         ArrayAdapter adapterObroci = new ArrayAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, tipoviObrokaItems);
         spTipObroka.setAdapter(adapterObroci);
+
+        rvNamirnice.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rvNamirnice.setLayoutManager(llm);
+        rvNamirnice.setAdapter(new NamirniceObrokaRecyclerViewAdapter(listaNamirnica, getContext()));
     }
 
     private void setupListeners() {
@@ -94,8 +103,10 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (cbPoznatiUgljikohidrati.isChecked()){
                     etUgljikohidrati.setVisibility(View.VISIBLE);
+                    fabDodaj.setVisibility((View.GONE));
                 }else{
                     etUgljikohidrati.setVisibility(View.GONE);
+                    fabDodaj.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -117,36 +128,52 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         String [] listInzulina = getActivity().getResources().getStringArray(R.array.kratkodjelujuciArray);
         inzulin = listInzulina[Integer.parseInt(sp.getString("kratkodjelujuci", null)) - 1] + ": ";
 
-        if(etGuk.getText().toString().equals("") || etUgljikohidrati.getText().toString().equals("")) {
-            Toast.makeText(getActivity(), "Oba polja je potrebno popuniti", Toast.LENGTH_LONG).show();
-        } else {
-            final double uneseniUgljikohodrati = Double.parseDouble(etUgljikohidrati.getText().toString());
-            final double uneseniGuk = Double.parseDouble(etGuk.getText().toString());
-            int kolicinaInzulina = IzracunInzulinaControler.getKolicinaInzulinaZaObrok(uneseniUgljikohodrati, uneseniGuk, getActivity());
-            final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setTitle("Info");
-            alertDialog.setMessage("Potrebno je uzeti " + inzulin + kolicinaInzulina + " jedinica.");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Spremi", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    TipObroka tipObroka = new TipObroka(spTipObroka.getSelectedItem().toString());
-                    Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, uneseniUgljikohodrati, tipObroka);
-                    noviObrok.save();
-                    etGuk.setText("");
-                    etUgljikohidrati.setText("");
-                }
-            });
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Odustani", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    alertDialog.dismiss();
-                }
-            });
-            alertDialog.show();
+        if (cbPoznatiUgljikohidrati.isChecked()){
+            if(etGuk.getText().toString().equals("") || etUgljikohidrati.getText().toString().equals("")) {
+                Toast.makeText(getActivity(), "Oba polja je potrebno popuniti", Toast.LENGTH_LONG).show();
+            } else {
+                uneseniUgljikohodrati = Double.parseDouble(etUgljikohidrati.getText().toString());
+                uneseniGuk = Double.parseDouble(etGuk.getText().toString());
+                kolicinaInzulina = IzracunInzulinaControler.getKolicinaInzulinaZaObrok(uneseniUgljikohodrati, uneseniGuk, getActivity());
+                prikaziDialog(kolicinaInzulina);
+            }
+        }else {
+            if (etGuk.getText().toString().equals("")){
+                Toast.makeText(getActivity(), "Polje guk je obavezno!!", Toast.LENGTH_LONG).show();
+            }else{
+                kolicinaInzulina = IzracunInzulinaControler.getKolicinaInzulinaZaObrok(ukupnoUgljikohidrata, uneseniGuk, getActivity());
+                prikaziDialog(kolicinaInzulina);
+            }
         }
+
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+    }
+
+    private void prikaziDialog(int kolicinaInzulina) {
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Info");
+        alertDialog.setMessage("Potrebno je uzeti " + inzulin + kolicinaInzulina + " jedinica.");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Spremi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                TipObroka tipObroka = new TipObroka(spTipObroka.getSelectedItem().toString());
+                Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, uneseniUgljikohodrati, tipObroka);
+                noviObrok.save();
+                etGuk.setText("");
+                etUgljikohidrati.setText("");
+            }
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Odustani", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
 
     }
 
@@ -166,6 +193,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         Namirnica novaNamirnica = Namirnica.getNamirnicapoImenu(namirnica);
         NamirniceObroka novaNamirnicaObroka = new NamirniceObroka(novaNamirnica, Double.parseDouble(kolicina));
         listaNamirnica.add(novaNamirnicaObroka);
-        //rvNamirnice.setAdapter(new NamirniceObrokaRecyclerViewAdapter(listaNamirnica, getContext()));
+        rvNamirnice.setAdapter(new NamirniceObrokaRecyclerViewAdapter(listaNamirnica, getContext()));
+        ukupnoUgljikohidrata += (Double.parseDouble(kolicina) / 100) * novaNamirnica.getUgljikohidrati();
     }
 }
