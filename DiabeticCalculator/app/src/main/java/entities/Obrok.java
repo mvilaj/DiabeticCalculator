@@ -49,13 +49,6 @@ public class Obrok extends BaseModel{
         TipObroka = tipObroka;
     }
 
-    public Obrok(int id, Date datum, double gukPrije, double ugljikohidrati, entities.TipObroka tipObroka) {
-        this.id = id;
-        Datum = datum;
-        GukPrije = gukPrije;
-        Ugljikohidrati = ugljikohidrati;
-        TipObroka = tipObroka;
-    }
 
     public int getId() {
         return id;

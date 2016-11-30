@@ -58,6 +58,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
     private double uneseniUgljikohodrati;
     private double uneseniGuk;
     private int kolicinaInzulina;
+    private TipObroka tipObroka;
 
     public IzracunFragment() {
 
@@ -120,6 +121,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                 nod.show(getActivity().getSupportFragmentManager(), "NOD");
             }
         });
+
     }
 
     private void izracunaj() {
@@ -127,6 +129,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String [] listInzulina = getActivity().getResources().getStringArray(R.array.kratkodjelujuciArray);
         inzulin = listInzulina[Integer.parseInt(sp.getString("kratkodjelujuci", null)) - 1] + ": ";
+        tipObroka = new TipObroka(spTipObroka.getSelectedItem().toString());
 
         if (cbPoznatiUgljikohidrati.isChecked()){
             if(etGuk.getText().toString().equals("") || etUgljikohidrati.getText().toString().equals("")) {
@@ -160,11 +163,21 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Spremi", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                TipObroka tipObroka = new TipObroka(spTipObroka.getSelectedItem().toString());
-                Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, uneseniUgljikohodrati, tipObroka);
-                noviObrok.save();
-                etGuk.setText("");
-                etUgljikohidrati.setText("");
+                if (cbPoznatiUgljikohidrati.isChecked()){
+                    Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, uneseniUgljikohodrati, tipObroka);
+                    noviObrok.save();
+                    etGuk.setText("");
+                    etUgljikohidrati.setText("");
+                }else{
+                    Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, ukupnoUgljikohidrata, tipObroka);
+                    noviObrok.save();
+
+                    for (NamirniceObroka no: listaNamirnica){
+                        no.setObrok(noviObrok);
+                        no.save();
+                    }
+                }
+
             }
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Odustani", new DialogInterface.OnClickListener() {
