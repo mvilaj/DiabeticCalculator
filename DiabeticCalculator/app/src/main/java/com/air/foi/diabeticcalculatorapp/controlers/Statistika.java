@@ -20,7 +20,7 @@ import entities.OstalaMjerenja;
  * Created by Danijel on 7.12.2016..
  */
 
-public class Statistika {
+public class Statistika extends Fragment {
 
     private TextView tvHBA1C;
     private double sum=0;
@@ -49,7 +49,7 @@ public class Statistika {
         }
         final List<Obrok> obroci=SQLite.select().from(Obrok.class).queryList();
         for (Obrok o: obroci){
-            if (o.getGukPrije()!=0.0{
+            if (o.getGukPrije()!=0.0){
             sum+=o.getGukPrije();
             brojMjerenja++;}
             if(o.getGukNakon()!=0.0){
