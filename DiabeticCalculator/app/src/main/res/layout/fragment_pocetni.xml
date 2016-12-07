@@ -1,14 +1,31 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragment.PocetniFragment">
+    android:orientation="vertical">
+
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Funkcionalnost jos nije implementiranja"
-        android:textSize="30dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HBA1C"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:textSize="42dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0,0"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:textSize="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:id="@+id/tvHBA1C"/>
+
+
+</LinearLayout>
