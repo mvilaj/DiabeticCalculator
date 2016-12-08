@@ -12,4 +12,6 @@
     <string name="kolicina">Količina:</string>
     <string name="odaberite_tip_obroka">Odaberite tip obroka:</string>
     <string name="kolicina_ugljikohidrata">Unesite količinu ugljikohidrata:</string>
+    <string name="odaberite_tip_mjerenja">Odaberite tip mjerenja:</string>
+    <string name="unesite_guk">Unesite GUK</string>
 </resources>
