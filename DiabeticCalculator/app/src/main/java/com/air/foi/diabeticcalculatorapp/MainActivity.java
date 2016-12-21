@@ -23,6 +23,7 @@ import java.util.List;
 import entities.DatabaseData;
 import entities.Namirnica;
 import fragment.IzracunFragment;
+import fragment.StatisticChart;
 import fragment.TabFragment;
 import fragment.UnosUBazu;
 
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_statistika:
                         Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
+                        //FragmentTransaction fragmentTransaction3 = mFragmentManager.beginTransaction();
+                        //fragmentTransaction3.replace(R.id.containerView,new StatisticChart()).commit();
                         return true;
 
                     case R.id.nav_unos:

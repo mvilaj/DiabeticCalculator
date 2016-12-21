@@ -40,6 +40,13 @@ public class OstalaMjerenja extends BaseModel{
         Guk = guk;
     }
 
+    public OstalaMjerenja( Date datum, TipMjerenja tipMjerenja, double guk) {
+
+        Datum = datum;
+        Guk = guk;
+        TipMjerenja = tipMjerenja;
+    }
+
     public int getId() {
         return id;
     }

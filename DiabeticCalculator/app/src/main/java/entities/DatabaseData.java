@@ -75,6 +75,20 @@ public class DatabaseData {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        OstalaMjerenja mjerenje2 = new OstalaMjerenja(datum2, nataste, 6.6);
+        mjerenje2.save();
+
+        String stringDatum2 = "2016-10-16";
+        try {
+            datum2 = df.parse(stringDatum2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        OstalaMjerenja mjerenje3 = new OstalaMjerenja(datum2, nataste, 8.6);
+        mjerenje3.save();
+
+        OstalaMjerenja mjerenje1 = new OstalaMjerenja(datum, nataste, 5.6);
+        mjerenje1.save();
 
 
     }
