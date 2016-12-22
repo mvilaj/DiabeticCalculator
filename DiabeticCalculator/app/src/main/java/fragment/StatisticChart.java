@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.controlers.StatisticChartData;
@@ -23,6 +24,7 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.Obrok;
 import entities.OstalaMjerenja;
 import entities.OstalaMjerenja_Table;
 import entities.TipMjerenja;
@@ -35,7 +37,7 @@ public class StatisticChart extends Fragment {
 
 
     private Spinner spStatisticType;
-    private LineChart linearChart;
+    public LineChart linearChart;
 
     public StatisticChart() {
         // Required empty public constructor
@@ -49,6 +51,38 @@ public class StatisticChart extends Fragment {
 
         initWidgets(v);
         setUpListeners();
+
+        /*final List<Obrok> mjerenjaNakon= SQLite.select()
+                .from(Obrok.class).queryList();
+
+        List<Entry> yValues = new ArrayList<>();
+        List<Entry> yValesNormal = new ArrayList<>();
+
+        int i = 1;
+        for (Obrok nakon: mjerenjaNakon ) {
+
+            if(nakon.getGukNakon()!=0.0){
+                yValesNormal.add(new Entry(i, 10,0));
+                yValues.add(new Entry(i, (float) nakon.getGukNakon()));
+                i++;
+            }
+        }
+
+        ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+
+        LineDataSet dataSet = new LineDataSet(yValues, "NAKON OBROKA");
+        dataSet.setDrawCircles(false);
+        dataSet.setColor(Color.YELLOW);
+
+        LineDataSet dataSet2 = new LineDataSet(yValesNormal, "NAKON OBROKA - GRANICA");
+        dataSet2.setDrawCircles(false);
+        dataSet2.setColor(Color.RED);
+
+        lineDataSets.add(dataSet);
+        lineDataSets.add(dataSet2);
+
+        LineData lineData = new LineData(lineDataSets);
+        linearChart.setData(lineData);*/
 
         String[] statisticiArray = getResources().getStringArray(R.array.statisticiArray);
         ArrayAdapter adapterStatisticType = new ArrayAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, statisticiArray);
@@ -64,15 +98,20 @@ public class StatisticChart extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                switch (i){
                    case 0:
+                       linearChart.clear();
                        linearChart.setData(StatisticChartData.getNatasteChartData());
                        break;
                    case 1:
+                       Toast.makeText(getActivity(), "Prije obroka", Toast.LENGTH_SHORT).show();
+                       linearChart.clear();
                        linearChart.setData(StatisticChartData.getBeforeMealChartData());
                        break;
                    case 2:
+                       linearChart.clear();
                        linearChart.setData(StatisticChartData.getAfterMealChartData());
                        break;
                    default:
+                       linearChart.clear();
                        linearChart.setData(StatisticChartData.getNatasteChartData());
                        break;
                }
@@ -81,10 +120,48 @@ public class StatisticChart extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                linearChart.clear();
                 linearChart.setData(StatisticChartData.getNatasteChartData());
             }
         });
 
+    }
+
+    private void setNakonObrokaChart() {
+
+        linearChart.clear();
+        final List<Obrok> mjerenjaPrije = SQLite.select()
+                .from(Obrok.class).queryList();
+
+        int duzina = mjerenjaPrije.size();
+        List<Entry> yValues = new ArrayList<>();
+        List<Entry> yValesNormal = new ArrayList<>();
+
+        int id = 1;
+        for (Obrok prije: mjerenjaPrije ) {
+
+            if(prije.getGukPrije()!=0.0){
+                yValesNormal.add(new Entry(id, 7,0));
+                yValues.add(new Entry(id, (float) prije.getGukPrije()));
+                id++;
+            }
+        }
+
+        ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+
+        LineDataSet dataSet = new LineDataSet(yValues, "PRIJE OBROKA");
+        dataSet.setDrawCircles(false);
+        dataSet.setColor(Color.GREEN);
+
+        LineDataSet dataSet2 = new LineDataSet(yValesNormal, "PRIJE OBROKA - GRANICA");
+        dataSet2.setDrawCircles(false);
+        dataSet2.setColor(Color.RED);
+
+        lineDataSets.add(dataSet);
+        lineDataSets.add(dataSet2);
+
+        LineData lineData = new LineData(lineDataSets);
+        linearChart.setData(lineData);
     }
 
     private void initWidgets(View v) {

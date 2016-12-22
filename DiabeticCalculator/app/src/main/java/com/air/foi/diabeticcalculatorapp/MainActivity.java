@@ -51,9 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         FlowManager.init(new FlowConfig.Builder(this).build());
-        Namirnica namirnica = new Namirnica();
-        if (namirnica.getNamirnice().size() == 0){
+
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isfirstrun",true);
+
+        if (isFirstRun){
             DatabaseData.writeAll();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isfirstrun",false).commit();
         }
 
         mFragmentManager = getSupportFragmentManager();
@@ -80,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.nav_statistika:
-                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
-                        //FragmentTransaction fragmentTransaction3 = mFragmentManager.beginTransaction();
-                        //fragmentTransaction3.replace(R.id.containerView,new StatisticChart()).commit();
+                        //Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
+                        FragmentTransaction fragmentTransaction3 = mFragmentManager.beginTransaction();
+                        fragmentTransaction3.replace(R.id.containerView,new StatisticChart()).commit();
                         return true;
 
                     case R.id.nav_unos:

@@ -1,6 +1,7 @@
 package com.air.foi.diabeticcalculatorapp.controlers;
 
 import android.graphics.Color;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -16,6 +17,7 @@ import entities.OstalaMjerenja;
 import entities.OstalaMjerenja_Table;
 import entities.TipMjerenja;
 import entities.TipMjerenja_Table;
+import fragment.StatisticChart;
 
 /**
  * Created by nikra on 21.12.2016..
@@ -25,22 +27,21 @@ public class StatisticChartData {
 
     public static LineData getNatasteChartData(){
 
-        int idNataste = SQLite.select()
-                .from(TipMjerenja.class)
-                .where(TipMjerenja_Table.Naziv.eq("Natašte")).querySingle().getId();
-
         final List<OstalaMjerenja> mjerenjaNataste= SQLite.select()
                 .from(OstalaMjerenja.class)
-                .where(OstalaMjerenja_Table.id.eq(idNataste)).queryList();
+                .queryList();
 
         List<Entry> yValues = new ArrayList<>();
         List<Entry> yValesNormal = new ArrayList<>();
 
         int i = 1;
         for (OstalaMjerenja nataste: mjerenjaNataste ) {
-            yValesNormal.add(new Entry(i, 6,0));
-            yValesNormal.add(new Entry(i, (float) nataste.getGuk()));
-            i++;
+            if (nataste.getTipMjerenja().getNaziv().equals("Natašte")){
+                yValesNormal.add(new Entry(i, 6,0));
+                yValues.add(new Entry(i, (float) nataste.getGuk()));
+                i++;
+            }
+
         }
 
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
@@ -56,17 +57,16 @@ public class StatisticChartData {
         lineDataSets.add(dataSet);
         lineDataSets.add(dataSet2);
 
-        //lineChart.setData(new LineData(lineDataSets));
-
         LineData lineData = new LineData(lineDataSets);
         return lineData;
     }
 
     public static LineData getBeforeMealChartData(){
 
-        final List<Obrok> mjerenjaPrije= SQLite.select()
+        final List<Obrok> mjerenjaPrije = SQLite.select()
                 .from(Obrok.class).queryList();
 
+        int duzina = mjerenjaPrije.size();
         List<Entry> yValues = new ArrayList<>();
         List<Entry> yValesNormal = new ArrayList<>();
 
@@ -75,7 +75,8 @@ public class StatisticChartData {
 
             if(prije.getGukPrije()!=0.0){
                 yValesNormal.add(new Entry(i, 7,0));
-                yValesNormal.add(new Entry(i, (float) prije.getGukPrije()));
+                yValues.add(new Entry(i, (float) prije.getGukPrije()));
+                i++;
             }
         }
 
@@ -109,7 +110,8 @@ public class StatisticChartData {
 
             if(nakon.getGukNakon()!=0.0){
                 yValesNormal.add(new Entry(i, 10,0));
-                yValesNormal.add(new Entry(i, (float) nakon.getGukNakon()));
+                yValues.add(new Entry(i, (float) nakon.getGukNakon()));
+                i++;
             }
         }
 
@@ -117,7 +119,7 @@ public class StatisticChartData {
 
         LineDataSet dataSet = new LineDataSet(yValues, "NAKON OBROKA");
         dataSet.setDrawCircles(false);
-        dataSet.setColor(Color.YELLOW);
+        dataSet.setColor(Color.MAGENTA);
 
         LineDataSet dataSet2 = new LineDataSet(yValesNormal, "NAKON OBROKA - GRANICA");
         dataSet2.setDrawCircles(false);
