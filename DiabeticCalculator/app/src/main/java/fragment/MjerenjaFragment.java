@@ -96,38 +96,16 @@ public class MjerenjaFragment extends Fragment {
                         .from(TipObroka.class)
                         .where(TipObroka_Table.Naziv.eq(spTipObroka.getSelectedItem().toString())).querySingle();
 
-                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-
                 switch (spTipMjerenja.getSelectedItemPosition()){
                     case 0:
                         OstalaMjerenja novoMjerenje = new OstalaMjerenja(datum, mjerenje, guk);
                         novoMjerenje.save();
-                        alertDialog.setTitle("Info");
-                        alertDialog.setMessage("Novo mjerenje natašte je dodano u bazu!");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-
-                        etGuk.setText("");
+                        showMessage("Novo mjerenje natašte je dodano u bazu!");
                         break;
                     case 1:
                         OstalaMjerenja novoMjerenje2 = new OstalaMjerenja(datum, mjerenje, guk);
                         novoMjerenje2.save();
-                        alertDialog.setTitle("Info");
-                        alertDialog.setMessage("Novo mjerenje kategorije ostalo je dodano u bazu!");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-
-                        etGuk.setText("");
+                        showMessage("Novo mjerenje kategorije ostalo je dodano u bazu!");
                         break;
                     case 2:
                         Obrok obrok = SQLite.select()
@@ -142,17 +120,7 @@ public class MjerenjaFragment extends Fragment {
                         } else {
                             Obrok noviObrok = new Obrok(datum, 0.0, guk, 0.0, tipObroka);
                         }
-                        alertDialog.setTitle("Info");
-                        alertDialog.setMessage("Novo mjerenje nakon obroka je dodano u bazu!");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-
-                        etGuk.setText("");
+                        showMessage("Novo mjerenje nakon obroka je dodano u bazu!");
                         break;
                     default:
                         break;
@@ -187,6 +155,21 @@ public class MjerenjaFragment extends Fragment {
                 spTipObroka.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void showMessage(String message){
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Info");
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+
+        etGuk.setText("");
     }
 
     private void initWidgets(View v) {
