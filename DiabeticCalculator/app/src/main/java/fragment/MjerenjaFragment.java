@@ -59,6 +59,9 @@ public class MjerenjaFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Metoda za punjenje spinnera
+     */
     private void setAdapters() {
         final List<TipObroka> tipoviObroka = SQLite.select().from(TipObroka.class).queryList();
         String[] tipoviObrokaItems = new String[tipoviObroka.size()];
@@ -80,50 +83,57 @@ public class MjerenjaFragment extends Fragment {
         spTipMjerenja.setAdapter(adapterMjerenja);
     }
 
+    /**
+     * Metoda za spremanje unosa mjerenja
+     */
     private void setUpListeners(){
         btnSpremi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double guk = Double.parseDouble(etGuk.getText().toString());
-                Date datum = new Date();
+                if(gukEntered()){
+                    double guk = Double.parseDouble(etGuk.getText().toString());
+                    Date datum = new Date();
 
-                String nazivMjerenja = spTipMjerenja.getSelectedItem().toString();
-                TipMjerenja mjerenje = SQLite.select()
-                        .from(TipMjerenja.class)
-                        .where(TipMjerenja_Table.Naziv.eq(nazivMjerenja)).querySingle();
+                    String nazivMjerenja = spTipMjerenja.getSelectedItem().toString();
+                    TipMjerenja mjerenje = SQLite.select()
+                            .from(TipMjerenja.class)
+                            .where(TipMjerenja_Table.Naziv.eq(nazivMjerenja)).querySingle();
 
-                TipObroka tipObroka = SQLite.select()
-                        .from(TipObroka.class)
-                        .where(TipObroka_Table.Naziv.eq(spTipObroka.getSelectedItem().toString())).querySingle();
+                    TipObroka tipObroka = SQLite.select()
+                            .from(TipObroka.class)
+                            .where(TipObroka_Table.Naziv.eq(spTipObroka.getSelectedItem().toString())).querySingle();
 
-                switch (spTipMjerenja.getSelectedItemPosition()){
-                    case 0:
-                        OstalaMjerenja novoMjerenje = new OstalaMjerenja(datum, mjerenje, guk);
-                        novoMjerenje.save();
-                        showMessage("Novo mjerenje natašte je dodano u bazu!");
-                        break;
-                    case 1:
-                        OstalaMjerenja novoMjerenje2 = new OstalaMjerenja(datum, mjerenje, guk);
-                        novoMjerenje2.save();
-                        showMessage("Novo mjerenje kategorije ostalo je dodano u bazu!");
-                        break;
-                    case 2:
-                        Obrok obrok = SQLite.select()
-                                .from(Obrok.class)
-                                .where(Obrok_Table.Datum.eq(datum))
-                                .and(Obrok_Table.TipObroka_id.is(tipObroka.getId()))
-                                .and(Obrok_Table.GukNakon.is(0.0)).querySingle();
+                    switch (spTipMjerenja.getSelectedItemPosition()){
+                        case 0:
+                            OstalaMjerenja novoMjerenje = new OstalaMjerenja(datum, mjerenje, guk);
+                            novoMjerenje.save();
+                            showMessage("Novo mjerenje natašte je dodano u bazu!");
+                            break;
+                        case 1:
+                            OstalaMjerenja novoMjerenje2 = new OstalaMjerenja(datum, mjerenje, guk);
+                            novoMjerenje2.save();
+                            showMessage("Novo mjerenje kategorije ostalo je dodano u bazu!");
+                            break;
+                        case 2:
+                            Obrok obrok = SQLite.select()
+                                    .from(Obrok.class)
+                                    .where(Obrok_Table.Datum.eq(datum))
+                                    .and(Obrok_Table.TipObroka_id.is(tipObroka.getId()))
+                                    .and(Obrok_Table.GukNakon.is(0.0)).querySingle();
 
-                        if(obrok != null){
-                            obrok.setGukNakon(guk);
-                            obrok.save();
-                        } else {
-                            Obrok noviObrok = new Obrok(datum, 0.0, guk, 0.0, tipObroka);
-                        }
-                        showMessage("Novo mjerenje nakon obroka je dodano u bazu!");
-                        break;
-                    default:
-                        break;
+                            if(obrok != null){
+                                obrok.setGukNakon(guk);
+                                obrok.save();
+                            } else {
+                                Obrok noviObrok = new Obrok(datum, 0.0, guk, 0.0, tipObroka);
+                            }
+                            showMessage("Novo mjerenje nakon obroka je dodano u bazu!");
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    showMessage("Polje GUK mora biti uneseno!");
                 }
             }
         });
@@ -157,6 +167,18 @@ public class MjerenjaFragment extends Fragment {
         });
     }
 
+    private boolean gukEntered(){
+        if(etGuk.getText().toString().equals("")){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Prikazuje poruku pomoću AlertDialoga
+     * @param message Poruka koja će se prikazati
+     */
     private void showMessage(String message){
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("Info");
