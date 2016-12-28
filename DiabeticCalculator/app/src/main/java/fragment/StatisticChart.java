@@ -52,37 +52,6 @@ public class StatisticChart extends Fragment {
         initWidgets(v);
         setUpListeners();
 
-        /*final List<Obrok> mjerenjaNakon= SQLite.select()
-                .from(Obrok.class).queryList();
-
-        List<Entry> yValues = new ArrayList<>();
-        List<Entry> yValesNormal = new ArrayList<>();
-
-        int i = 1;
-        for (Obrok nakon: mjerenjaNakon ) {
-
-            if(nakon.getGukNakon()!=0.0){
-                yValesNormal.add(new Entry(i, 10,0));
-                yValues.add(new Entry(i, (float) nakon.getGukNakon()));
-                i++;
-            }
-        }
-
-        ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
-
-        LineDataSet dataSet = new LineDataSet(yValues, "NAKON OBROKA");
-        dataSet.setDrawCircles(false);
-        dataSet.setColor(Color.YELLOW);
-
-        LineDataSet dataSet2 = new LineDataSet(yValesNormal, "NAKON OBROKA - GRANICA");
-        dataSet2.setDrawCircles(false);
-        dataSet2.setColor(Color.RED);
-
-        lineDataSets.add(dataSet);
-        lineDataSets.add(dataSet2);
-
-        LineData lineData = new LineData(lineDataSets);
-        linearChart.setData(lineData);*/
 
         String[] statisticiArray = getResources().getStringArray(R.array.statisticiArray);
         ArrayAdapter adapterStatisticType = new ArrayAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, statisticiArray);

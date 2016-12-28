@@ -25,6 +25,10 @@ import fragment.StatisticChart;
 
 public class StatisticChartData {
 
+    /**
+     *
+     * @return
+     */
     public static LineData getNatasteChartData(){
 
         final List<OstalaMjerenja> mjerenjaNataste= SQLite.select()

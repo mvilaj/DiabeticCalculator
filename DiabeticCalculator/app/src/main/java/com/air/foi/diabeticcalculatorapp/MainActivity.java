@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+        TabFragment fragment = new TabFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("TYPE", 1);
+        fragment.setArguments(bundle);
+        mFragmentTransaction.replace(R.id.containerView,fragment).commit();
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -73,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_pocetna:
                         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+                        TabFragment fragment = new TabFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("TYPE", 1);
+                        fragment.setArguments(bundle);
+                        fragmentTransaction.replace(R.id.containerView, fragment).commit();
                         return true;
 
                     case R.id.nav_podsjetnik:
@@ -84,10 +92,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.nav_statistika:
-                        //Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
                         FragmentTransaction fragmentTransaction3 = mFragmentManager.beginTransaction();
-                        fragmentTransaction3.replace(R.id.containerView,new OstalaStatistika()).commit();
-                        //fragmentTransaction3.replace(R.id.containerView,new StatisticChart()).commit();
+                        TabFragment fragmentStat = new TabFragment();
+                        Bundle bundleStat = new Bundle();
+                        bundleStat.putInt("TYPE", 2);
+                        fragmentStat.setArguments(bundleStat);
+                        fragmentTransaction3.replace(R.id.containerView,fragmentStat).commit();
                         return true;
 
                     case R.id.nav_unos:
