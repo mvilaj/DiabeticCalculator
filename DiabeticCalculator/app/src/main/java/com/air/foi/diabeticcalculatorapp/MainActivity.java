@@ -119,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metoda koja provjerava dali su uneseni potrebni
+     * podaci, koji su obavezni za izračun
+     * @return true ili false ovisno o tome dali su podaci uneseni
+     */
     private boolean chechPreferences() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 

@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.R;
-import com.air.foi.diabeticcalculatorapp.controlers.StatisticChartData;
+import com.air.foi.diabeticcalculatorapp.businessLogic.StatisticChartData;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -25,10 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Obrok;
-import entities.OstalaMjerenja;
-import entities.OstalaMjerenja_Table;
-import entities.TipMjerenja;
-import entities.TipMjerenja_Table;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,11 +56,15 @@ public class StatisticChart extends Fragment {
         return  v;
     }
 
+    /**
+     * Metoda koja postavlja listenere na kontrole.
+     */
     private void setUpListeners() {
 
         spStatisticType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                switch (i){
                    case 0:
                        linearChart.clear();
@@ -96,43 +96,11 @@ public class StatisticChart extends Fragment {
 
     }
 
-    private void setNakonObrokaChart() {
 
-        linearChart.clear();
-        final List<Obrok> mjerenjaPrije = SQLite.select()
-                .from(Obrok.class).queryList();
-
-        int duzina = mjerenjaPrije.size();
-        List<Entry> yValues = new ArrayList<>();
-        List<Entry> yValesNormal = new ArrayList<>();
-
-        int id = 1;
-        for (Obrok prije: mjerenjaPrije ) {
-
-            if(prije.getGukPrije()!=0.0){
-                yValesNormal.add(new Entry(id, 7,0));
-                yValues.add(new Entry(id, (float) prije.getGukPrije()));
-                id++;
-            }
-        }
-
-        ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
-
-        LineDataSet dataSet = new LineDataSet(yValues, "PRIJE OBROKA");
-        dataSet.setDrawCircles(false);
-        dataSet.setColor(Color.GREEN);
-
-        LineDataSet dataSet2 = new LineDataSet(yValesNormal, "PRIJE OBROKA - GRANICA");
-        dataSet2.setDrawCircles(false);
-        dataSet2.setColor(Color.RED);
-
-        lineDataSets.add(dataSet);
-        lineDataSets.add(dataSet2);
-
-        LineData lineData = new LineData(lineDataSets);
-        linearChart.setData(lineData);
-    }
-
+    /**
+     * Metoda koja inicijalizira kontrole.
+     * @param v View
+     */
     private void initWidgets(View v) {
 
         spStatisticType = (Spinner) v.findViewById(R.id.spStatisticTyp);

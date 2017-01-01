@@ -1,7 +1,6 @@
-package com.air.foi.diabeticcalculatorapp.controlers;
+package com.air.foi.diabeticcalculatorapp.businessLogic;
 
 import android.graphics.Color;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -14,10 +13,6 @@ import java.util.List;
 
 import entities.Obrok;
 import entities.OstalaMjerenja;
-import entities.OstalaMjerenja_Table;
-import entities.TipMjerenja;
-import entities.TipMjerenja_Table;
-import fragment.StatisticChart;
 
 /**
  * Created by nikra on 21.12.2016..
@@ -26,8 +21,9 @@ import fragment.StatisticChart;
 public class StatisticChartData {
 
     /**
-     *
-     * @return
+     * Metoda dohvača podatke iz baze podatka koji su potrebni
+     * za grafički prikaz GUKA natašte
+     * @return LIneData za GUK natašte
      */
     public static LineData getNatasteChartData(){
 
@@ -65,6 +61,11 @@ public class StatisticChartData {
         return lineData;
     }
 
+    /**
+     * Metoda dohvača podatke iz baze podatka koji su potrebni
+     * za grafički prikaz GUKA prije oborka
+     * @return LineData za GUK prije obroka
+     */
     public static LineData getBeforeMealChartData(){
 
         final List<Obrok> mjerenjaPrije = SQLite.select()
@@ -101,6 +102,11 @@ public class StatisticChartData {
         return lineData;
     }
 
+    /**
+     * Metoda dohvača podatke iz baze podatka koji su potrebni
+     * za grafički prikaz GUKA nakon oborka
+     * @return LIneData za GUK nakon obroka
+     */
     public static LineData getAfterMealChartData(){
 
         final List<Obrok> mjerenjaNakon= SQLite.select()

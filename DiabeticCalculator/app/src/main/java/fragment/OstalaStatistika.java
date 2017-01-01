@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.air.foi.diabeticcalculatorapp.R;
-import com.air.foi.diabeticcalculatorapp.controlers.Statistika;
+import com.air.foi.diabeticcalculatorapp.businessLogic.Statistika;
 
 import java.text.DecimalFormat;
 

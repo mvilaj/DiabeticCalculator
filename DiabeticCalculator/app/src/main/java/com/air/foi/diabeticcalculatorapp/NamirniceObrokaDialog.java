@@ -25,6 +25,9 @@ public class NamirniceObrokaDialog extends android.support.v4.app.DialogFragment
 
     private DodanaNamirnicaListener callback;
 
+    SearchableSpinner spNamirnice;
+    EditText etKolicina;
+
     public interface DodanaNamirnicaListener{
         public void dodanaNamirnica(String namirnica, String kolicina);
     }
@@ -35,9 +38,6 @@ public class NamirniceObrokaDialog extends android.support.v4.app.DialogFragment
         callback = (DodanaNamirnicaListener) getTargetFragment();
     }
 
-
-    SearchableSpinner spNamirnice;
-    EditText etKolicina;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -74,6 +74,10 @@ public class NamirniceObrokaDialog extends android.support.v4.app.DialogFragment
 
     private String[] listaNamirnica;
 
+    /**
+     * Metoda koja iz baze dohvača podatke potrebne
+     * za punjenje spinera, te dodaje adapter na spiner.
+     */
     private void populateSpinner() {
 
         final List<Namirnica> namirnice = Namirnica.getNamirnice();
