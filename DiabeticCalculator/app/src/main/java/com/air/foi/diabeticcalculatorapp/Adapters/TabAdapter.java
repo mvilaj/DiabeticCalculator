@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import fragment.DnevnikFragment;
 import fragment.IzracunFragment;
 import fragment.MjerenjaFragment;
 import fragment.OstalaStatistika;
@@ -16,7 +17,7 @@ import fragment.StatisticChart;
 
 public class TabAdapter extends FragmentPagerAdapter {
     private String [] tabTitles = {"Home", "Izracun inzulina", "Novo mjerenje"};
-    private String [] tabTitlesStat = {"Statistika", "Grafički prikaz"};
+    private String [] tabTitlesStat = {"Statistika", "Grafički prikaz", "Dnevnik"};
     private int type;
 
     public TabAdapter(FragmentManager fm, int type) {
@@ -42,6 +43,8 @@ public class TabAdapter extends FragmentPagerAdapter {
                     return new OstalaStatistika();
                 case 1:
                     return new StatisticChart();
+                case 2:
+                    return new DnevnikFragment();
             }
         }
         return null;

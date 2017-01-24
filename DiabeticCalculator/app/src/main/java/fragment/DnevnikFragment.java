@@ -1,6 +1,7 @@
 package fragment;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.ButtonBarLayout;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.air.foi.diabeticcalculatorapp.DnevnikDatePickerDialog;
 import com.air.foi.diabeticcalculatorapp.R;
 
 /**
@@ -62,7 +64,10 @@ public class DnevnikFragment extends Fragment {
         btnDatum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
+                DnevnikDatePickerDialog ddpd = new DnevnikDatePickerDialog();
+                ddpd.show(getActivity().getSupportFragmentManager(), "DDPD");
+
             }
         });
 
