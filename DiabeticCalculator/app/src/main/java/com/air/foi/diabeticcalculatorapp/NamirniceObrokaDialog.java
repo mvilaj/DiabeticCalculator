@@ -23,10 +23,10 @@ import entities.Namirnica;
 
 public class NamirniceObrokaDialog extends android.support.v4.app.DialogFragment{
 
-    private DodanaNamirnicaListener callback;
-
     SearchableSpinner spNamirnice;
     EditText etKolicina;
+
+    private DodanaNamirnicaListener callback;
 
     public interface DodanaNamirnicaListener{
         public void dodanaNamirnica(String namirnica, String kolicina);

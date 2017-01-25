@@ -10,14 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.DnevnikDatePickerDialog;
 import com.air.foi.diabeticcalculatorapp.R;
+import com.air.foi.diabeticcalculatorapp.businessLogic.Dnevnik;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+
+import java.util.Date;
+import java.util.List;
+
+import entities.Obrok;
+import entities.Obrok_Table;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DnevnikFragment extends Fragment {
+public class DnevnikFragment extends Fragment implements DnevnikDatePickerDialog.DatumOdabranListener {
 
     private Button btnDatum;
     private TextView txtGukNataste;
@@ -27,6 +36,8 @@ public class DnevnikFragment extends Fragment {
     private TextView txtGukRucakPrije;
     private TextView txtGukVeceraPrije;
     private TextView txtGukVeceraNakon;
+
+    private Fragment fragment = this;
 
 
 
@@ -65,12 +76,27 @@ public class DnevnikFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                DnevnikDatePickerDialog ddpd = new DnevnikDatePickerDialog();
-                ddpd.show(getActivity().getSupportFragmentManager(), "DDPD");
+               /* DnevnikDatePickerDialog ddpd = new DnevnikDatePickerDialog();
+                ddpd.setTargetFragment(fragment, 0);
+                ddpd.show(getActivity().getSupportFragmentManager(), "DDPD");*/
 
+                final List<Obrok> mjerenjaZaObrokeNaDatum = SQLite.select()
+                        .from(Obrok.class).queryList();
+
+                for (Obrok o: mjerenjaZaObrokeNaDatum) {
+                    Toast.makeText(getActivity(), o.getDatum().toString() , Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
+    @Override
+    public void odabranDatum(Date datum) {
+
+        txtGukNataste.setText(Dnevnik.getMjerenjeNatasteNaDatum(datum));
+        txtGukDorucakPrije.setText(Dnevnik.getGukPrijeDorucka(datum));
+        txtGukDorucakNakon.setText(Dnevnik.getGukNakonDorucka(datum));
+
+    }
 }

@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Korisnik on 1/24/2017.
@@ -14,9 +17,15 @@ import java.util.Calendar;
 
 public class DnevnikDatePickerDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
+    private DatumOdabranListener callback;
+
+    public interface DatumOdabranListener{
+        public void odabranDatum(Date datum);
+    }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        callback = (DatumOdabranListener) getTargetFragment();
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -30,5 +39,11 @@ public class DnevnikDatePickerDialog extends DialogFragment implements DatePicke
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+        Date odabraniDatum = new Date();
+        odabraniDatum.setMonth(month);
+        odabraniDatum.setYear(year);
+        odabraniDatum.setDate(dayOfMonth);
+
+        callback.odabranDatum(odabraniDatum);
     }
 }

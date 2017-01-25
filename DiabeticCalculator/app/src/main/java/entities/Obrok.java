@@ -49,6 +49,13 @@ public class Obrok extends BaseModel{
         TipObroka = tipObroka;
     }
 
+    public entities.TipObroka getTipObroka() {
+        return TipObroka;
+    }
+
+    public void setTipObroka(entities.TipObroka tipObroka) {
+        TipObroka = tipObroka;
+    }
 
     public int getId() {
         return id;
