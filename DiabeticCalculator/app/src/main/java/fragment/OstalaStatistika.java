@@ -43,7 +43,7 @@ public class OstalaStatistika extends Fragment {
         DecimalFormat decimal=new DecimalFormat("#.##");
         double nataste=Double.valueOf(decimal.format(ispis1));
         tvGukNataste.setText(String.valueOf(nataste));
-        
+
         //Ispis prosjeka guk-a prije obroka
 
         tvGukPrijeObroka=(TextView) v.findViewById(R.id.tvGukPrijeObroka);
