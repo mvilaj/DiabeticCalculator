@@ -22,6 +22,7 @@ import java.util.List;
 
 import entities.Obrok;
 import entities.Obrok_Table;
+import entities.TipObroka;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,16 +77,11 @@ public class DnevnikFragment extends Fragment implements DnevnikDatePickerDialog
             @Override
             public void onClick(View v) {
 
-               /* DnevnikDatePickerDialog ddpd = new DnevnikDatePickerDialog();
+                DnevnikDatePickerDialog ddpd = new DnevnikDatePickerDialog();
                 ddpd.setTargetFragment(fragment, 0);
-                ddpd.show(getActivity().getSupportFragmentManager(), "DDPD");*/
+                ddpd.show(getActivity().getSupportFragmentManager(), "DDPD");
 
-                final List<Obrok> mjerenjaZaObrokeNaDatum = SQLite.select()
-                        .from(Obrok.class).queryList();
 
-                for (Obrok o: mjerenjaZaObrokeNaDatum) {
-                    Toast.makeText(getActivity(), o.getDatum().toString() , Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -97,6 +93,10 @@ public class DnevnikFragment extends Fragment implements DnevnikDatePickerDialog
         txtGukNataste.setText(Dnevnik.getMjerenjeNatasteNaDatum(datum));
         txtGukDorucakPrije.setText(Dnevnik.getGukPrijeDorucka(datum));
         txtGukDorucakNakon.setText(Dnevnik.getGukNakonDorucka(datum));
+        txtGukRucakPrije.setText(Dnevnik.getGukPrijeRucka(datum));
+        txtGukRucakNakon.setText(Dnevnik.getGukNakonRucka(datum));
+        txtGukVeceraPrije.setText(Dnevnik.getGukPrijeVecere(datum));
+        txtGukVeceraNakon.setText(Dnevnik.getGukNakonVecere(datum));
 
     }
 }

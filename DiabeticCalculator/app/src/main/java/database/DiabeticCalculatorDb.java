@@ -8,5 +8,5 @@ import com.raizlabs.android.dbflow.annotation.Database;
 @Database(name = DiabeticCalculatorDb.NAME, version = DiabeticCalculatorDb.VERSION)
 public class DiabeticCalculatorDb {
     public static final String NAME = "DiabeticCalculator";
-    public static final int VERSION = 2;
+    public static final int VERSION = 4;
 }

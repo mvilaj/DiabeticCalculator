@@ -4,6 +4,8 @@ import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import entities.OstalaMjerenja;
 import entities.OstalaMjerenja_Table;
 import entities.TipMjerenja;
 import entities.TipMjerenja_Table;
+import entities.TipObroka;
 
 /**
  * Created by Korisnik on 1/25/2017.
@@ -23,7 +26,8 @@ public class Dnevnik {
     private static List<Obrok> getListaMjerenjaObrok (Date datum){
         Date datumDanas = new Date();
         final List<Obrok> mjerenjaZaObrokeNaDatum = SQLite.select()
-                .from(Obrok.class).where(Obrok_Table.Datum.eq(datum)).queryList();
+                .from(Obrok.class).queryList();
+
 
 
         return mjerenjaZaObrokeNaDatum;
@@ -35,8 +39,8 @@ public class Dnevnik {
                 .from(TipMjerenja.class).where(TipMjerenja_Table.Naziv.eq("Natašte")).querySingle();
 
         final List<OstalaMjerenja> mjerenjaNatašteNaDatum = SQLite.select()
-                .from(OstalaMjerenja.class).where(OstalaMjerenja_Table.Datum.eq(datum))
-                .and(OstalaMjerenja_Table.TipMjerenja_id.eq(natste.getId())).queryList();
+                .from(OstalaMjerenja.class)
+                .where(OstalaMjerenja_Table.TipMjerenja_id.eq(natste.getId())).queryList();
 
         return mjerenjaNatašteNaDatum;
 
@@ -50,9 +54,16 @@ public class Dnevnik {
             mjerenje = "--";
         }else{
             for (OstalaMjerenja mn: mjerenjeNataste) {
+                Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date datumMjerenja = mn.getDatum();
+                String datumMjerenjaString = formatter.format(mn.getDatum());
+                String zeljeniDatumString = formatter.format(datum);
 
-                mjerenje = Double.toString(mn.getGuk());
-
+                if(datumMjerenjaString.equals(zeljeniDatumString)){
+                    mjerenje = Double.toString(mn.getGuk());
+                }else{
+                    mjerenje = "--";
+                }
             }
 
         }
@@ -66,9 +77,14 @@ public class Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-            if (o.getTipObroka().getNaziv().equals("Dorucak"))
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String datumMjerenjaString = formatter.format(o.getDatum());
+            String zeljeniDatumString = formatter.format(datum);
+
+            if (o.getTipObroka().getNaziv().equals("Doručak") && datumMjerenjaString.equals(zeljeniDatumString))
             {
                 gukPrijeDorucka = Double.toString(o.getGukPrije());
+                break;
             }else{
                 gukPrijeDorucka = "--";
             }
@@ -84,9 +100,14 @@ public class Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-            if (o.getTipObroka().getNaziv().equals("Doručak"))
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String datumMjerenjaString = formatter.format(o.getDatum());
+            String zeljeniDatumString = formatter.format(datum);
+
+            if (o.getTipObroka().getNaziv().equals("Doručak") && datumMjerenjaString.equals(zeljeniDatumString))
             {
                 gukNakonDorucka = Double.toString(o.getGukNakon());
+                break;
             }else{
                 gukNakonDorucka = "--";
             }
@@ -102,9 +123,14 @@ public class Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-            if (o.getTipObroka().getNaziv().equals("Ručak"))
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String datumMjerenjaString = formatter.format(o.getDatum());
+            String zeljeniDatumString = formatter.format(datum);
+
+            if (o.getTipObroka().getNaziv().equals("Ručak") && datumMjerenjaString.equals(zeljeniDatumString))
             {
                 gukNakonRucka = Double.toString(o.getGukNakon());
+                break;
             }else{
                 gukNakonRucka = "--";
             }
@@ -120,9 +146,14 @@ public class Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-            if (o.getTipObroka().getNaziv().equals("Ručak"))
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String datumMjerenjaString = formatter.format(o.getDatum());
+            String zeljeniDatumString = formatter.format(datum);
+
+            if (o.getTipObroka().getNaziv().equals("Ručak") && datumMjerenjaString.equals(zeljeniDatumString))
             {
                 gukPrijeRucka = Double.toString(o.getGukPrije());
+                break;
             }else{
                 gukPrijeRucka = "--";
             }
@@ -138,9 +169,14 @@ public class Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-            if (o.getTipObroka().getNaziv().equals("Večera"))
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String datumMjerenjaString = formatter.format(o.getDatum());
+            String zeljeniDatumString = formatter.format(datum);
+
+            if (o.getTipObroka().getNaziv().equals("Večera") && datumMjerenjaString.endsWith(zeljeniDatumString))
             {
                 gukNakonVecere = Double.toString(o.getGukNakon());
+                break;
             }else{
                 gukNakonVecere = "--";
             }
@@ -156,9 +192,14 @@ public class Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-            if (o.getTipObroka().getNaziv().equals("Večera"))
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String datumMjerenjaString = formatter.format(o.getDatum());
+            String zeljeniDatumString = formatter.format(datum);
+
+            if (o.getTipObroka().getNaziv().equals("Večera") && datumMjerenjaString.equals(zeljeniDatumString))
             {
                 gukPrijeVecere = Double.toString(o.getGukPrije());
+                break;
             }else{
                 gukPrijeVecere = "--";
             }

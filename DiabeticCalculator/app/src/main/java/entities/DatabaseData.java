@@ -94,7 +94,7 @@ public class DatabaseData {
         o1.save();
         Obrok o2 = new Obrok (datum2, 6.5, 8.0, 60, rucak);
         o2.save();
-        Obrok o3 = new Obrok (datum, 5.0, 6.9, 50, dorucak);
+        Obrok o3 = new Obrok (datum, 5.0, 6.9, 50, vecera);
         o3.save();
 
 

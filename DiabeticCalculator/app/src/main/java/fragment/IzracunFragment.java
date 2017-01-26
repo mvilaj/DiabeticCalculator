@@ -141,7 +141,8 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String [] listInzulina = getActivity().getResources().getStringArray(R.array.kratkodjelujuciArray);
         inzulin = listInzulina[Integer.parseInt(sp.getString("kratkodjelujuci", null)) - 1] + ": ";
-        tipObroka = new TipObroka(spTipObroka.getSelectedItem().toString());
+        String tipObrokaString = spTipObroka.getSelectedItem().toString();
+        tipObroka = TipObroka.getTipObroka(tipObrokaString);
 
         if (cbPoznatiUgljikohidrati.isChecked()){
             if(etGuk.getText().toString().equals("") || etUgljikohidrati.getText().toString().equals("")) {

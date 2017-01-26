@@ -39,11 +39,11 @@ public class DnevnikDatePickerDialog extends DialogFragment implements DatePicke
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-        Date odabraniDatum = new Date();
-        odabraniDatum.setMonth(month);
-        odabraniDatum.setYear(year);
-        odabraniDatum.setDate(dayOfMonth);
+        Date odbrDatum = new Date();
+        odbrDatum.setMonth(month);
+        odbrDatum.setYear(year -1900);
+        odbrDatum.setDate(dayOfMonth);
 
-        callback.odabranDatum(odabraniDatum);
+        callback.odabranDatum(odbrDatum);
     }
 }

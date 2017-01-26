@@ -46,7 +46,7 @@ public class TipObroka extends BaseModel {
         Naziv = naziv;
     }
 
-    public TipObroka getTipObroka (String naziv){
+    public static TipObroka getTipObroka (String naziv){
         TipObroka tipObroka = SQLite.select()
                 .from(TipObroka.class)
                 .where(TipObroka_Table.Naziv.eq(naziv)).querySingle();
