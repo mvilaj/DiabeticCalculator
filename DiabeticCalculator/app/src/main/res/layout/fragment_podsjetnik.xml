@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.air.foi.diabeticcalculatorapp.MainActivity$PodsjetnikFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Button
+        android:text="Postavi podsjetnik"
+        android:layout_width="60dp"
+        android:textStyle="bold"
+        android:layout_height="60dp"
+        android:background="@color/blue"
+        android:layout_marginRight="95dp"
+        android:layout_marginLeft="95dp"
+        android:gravity="center"
+        android:layout_marginTop="90dp"
+        android:id="@+id/button"
+        android:layout_weight="0.14"
+        android:elevation="12dp" />
+</LinearLayout>
