@@ -23,6 +23,7 @@ import java.util.List;
 import entities.DatabaseData;
 import entities.Namirnica;
 import fragment.IzracunFragment;
+import fragment.MjerenjaFragment;
 import fragment.OstalaStatistika;
 import fragment.StatisticChart;
 import fragment.TabFragment;
@@ -108,6 +109,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        String openFragment = getIntent().getStringExtra("openFragment");
+
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+
+        // If openFragment is defined, load fragment
+        if(openFragment != null){
+            MjerenjaFragment mjerenjaFragment = new MjerenjaFragment();
+            // Exit background app
+            mFragmentTransaction.addToBackStack(null);
+            mFragmentTransaction.replace(R.id.containerView, mjerenjaFragment).commit();
+        }
     }
 
     @Override

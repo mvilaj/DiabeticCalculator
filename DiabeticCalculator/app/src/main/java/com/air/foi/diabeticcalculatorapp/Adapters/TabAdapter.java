@@ -16,7 +16,7 @@ import fragment.StatisticChart;
  */
 
 public class TabAdapter extends FragmentPagerAdapter {
-    private String [] tabTitles = {"Home", "Izracun inzulina", "Novo mjerenje"};
+    private String [] tabTitles = {"Home", "Izračun inzulina", "Novo mjerenje"};
     private String [] tabTitlesStat = {"Statistika", "Grafički prikaz", "Dnevnik"};
     private int type;
 

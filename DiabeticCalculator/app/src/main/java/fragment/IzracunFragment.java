@@ -27,8 +27,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.Adapters.NamirniceObrokaRecyclerViewAdapter;
+import com.air.foi.diabeticcalculatorapp.MainActivity;
 import com.air.foi.diabeticcalculatorapp.NamirniceObrokaDialog;
-import com.air.foi.diabeticcalculatorapp.NotificationReceiverActivity;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.businessLogic.IzracunInzulina;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -204,13 +204,14 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                 }
 
                 // Show notification
-                Intent intent = new Intent(getContext(), NotificationReceiverActivity.class);
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra("openFragment","mjerenje_fragment");
                 PendingIntent pIntent = PendingIntent.getActivity(getContext(), (int) System.currentTimeMillis(), intent, 0);
 
                 // Build notification
                 android.app.Notification noti = new Notification.Builder(getContext())
                         .setContentTitle("Podsjetnik za mjerenje glukoze")
-                        .setContentText("Prošlo je 2 sata od zadnjeg obroka. Pritisnite ovu obavijest za unos mjerenja glukoze.")
+                        .setContentText("Izmjerite vrijednost glukoze.")
                         .setContentIntent(pIntent)
                         .setSmallIcon(R.drawable.ic_action_alarm_clock_48).build();
                 NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);

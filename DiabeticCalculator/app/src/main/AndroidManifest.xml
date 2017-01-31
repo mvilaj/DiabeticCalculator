@@ -16,7 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".preferences.CustomPreferencesActivity"></activity>
-        <activity android:name=".NotificationReceiverActivity"></activity>
     </application>
 
 </manifest>
