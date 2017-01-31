@@ -1,7 +1,11 @@
 package fragment;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,6 +28,7 @@ import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.Adapters.NamirniceObrokaRecyclerViewAdapter;
 import com.air.foi.diabeticcalculatorapp.NamirniceObrokaDialog;
+import com.air.foi.diabeticcalculatorapp.NotificationReceiverActivity;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.businessLogic.IzracunInzulina;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -197,6 +202,22 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                         no.save();
                     }
                 }
+
+                // Show notification
+                Intent intent = new Intent(getContext(), NotificationReceiverActivity.class);
+                PendingIntent pIntent = PendingIntent.getActivity(getContext(), (int) System.currentTimeMillis(), intent, 0);
+
+                // Build notification
+                android.app.Notification noti = new Notification.Builder(getContext())
+                        .setContentTitle("Podsjetnik za mjerenje glukoze")
+                        .setContentText("Prošlo je 2 sata od zadnjeg obroka. Pritisnite ovu obavijest za unos mjerenja glukoze.")
+                        .setContentIntent(pIntent)
+                        .setSmallIcon(R.drawable.ic_action_alarm_clock_48).build();
+                NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                // Hide notification after it is selected
+                noti.flags |= Notification.FLAG_AUTO_CANCEL;
+
+                notificationManager.notify(0, noti);
 
             }
         });
