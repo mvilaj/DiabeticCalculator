@@ -40,7 +40,7 @@ public class OstalaStatistika extends Fragment {
 
         ispis1=stats.prosjekGukNataste();
 
-        DecimalFormat decimal=new DecimalFormat("#.##");
+        DecimalFormat decimal=new DecimalFormat("#,##");
         double nataste=Double.valueOf(decimal.format(ispis1));
         tvGukNataste.setText(String.valueOf(nataste));
 
@@ -50,7 +50,7 @@ public class OstalaStatistika extends Fragment {
 
         ispis2=stats.prosjekGukPrijeObroka();
 
-        DecimalFormat decimal2=new DecimalFormat("#.##");
+        DecimalFormat decimal2=new DecimalFormat("#,##");
         double prije=Double.valueOf(decimal2.format(ispis2));
         tvGukPrijeObroka.setText(String.valueOf(prije));
 
@@ -60,7 +60,7 @@ public class OstalaStatistika extends Fragment {
 
         ispis3=stats.prosjekGukNakonObroka();
 
-        DecimalFormat decimal3=new DecimalFormat("#.##");
+        DecimalFormat decimal3=new DecimalFormat("#,##");
         double poslije=Double.valueOf(decimal3.format(ispis3));
         tvGukPoslijeObroka.setText(String.valueOf(poslije));
 

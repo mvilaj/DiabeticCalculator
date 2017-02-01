@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:text="Prosjek GUK-a natašte:"
+            android:text="Prosjek GUK-a na tašte:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"

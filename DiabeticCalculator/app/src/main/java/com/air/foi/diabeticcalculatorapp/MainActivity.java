@@ -86,7 +86,12 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_podsjetnik:
-                        Toast.makeText(MainActivity.this, "Jos nije implementrano!!", Toast.LENGTH_LONG).show();
+                        FragmentTransaction fragmentTransactionP = mFragmentManager.beginTransaction();
+                        TabFragment fragmentPodsjetnik = new TabFragment();
+                        Bundle bundlePodsjetnik = new Bundle();
+                        bundlePodsjetnik.putInt("TYPE",3 );
+                        fragmentPodsjetnik.setArguments(bundlePodsjetnik);
+                        fragmentTransactionP.replace(R.id.containerView,new Podsjetnik()).commit();
                         return true;
                     case R.id.nav_profil:
                         Intent i = new Intent(getApplicationContext(), CustomPreferencesActivity.class);

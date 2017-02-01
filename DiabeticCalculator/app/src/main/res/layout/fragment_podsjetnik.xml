@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.air.foi.diabeticcalculatorapp.MainActivity$PodsjetnikFragment">
+    tools:context="com.air.foi.diabeticcalculatorapp.Podsjetnik">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -18,7 +18,7 @@
         android:layout_marginLeft="95dp"
         android:gravity="center"
         android:layout_marginTop="90dp"
-        android:id="@+id/button"
+        android:id="@+id/btnPodsjetnik"
         android:layout_weight="0.14"
         android:elevation="12dp" />
 </LinearLayout>
