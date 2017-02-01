@@ -110,16 +110,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String openFragment = getIntent().getStringExtra("openFragment");
+        String fragmentToOpen = getIntent().getStringExtra("fragmentToOpen");
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
 
-        // If openFragment is defined, load fragment
-        if(openFragment != null){
+        // If fragmentToOpen is defined, load fragment
+        if(fragmentToOpen != null && fragmentToOpen.equals("MjerenjaFragment")){
             MjerenjaFragment mjerenjaFragment = new MjerenjaFragment();
-            // Exit background app
-            mFragmentTransaction.addToBackStack(null);
+            //mFragmentTransaction.addToBackStack(null);    // Exit background app
             mFragmentTransaction.replace(R.id.containerView, mjerenjaFragment).commit();
         }
     }

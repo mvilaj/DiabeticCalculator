@@ -1,13 +1,14 @@
 package fragment;
 
+import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.air.foi.diabeticcalculatorapp.Adapters.NamirniceObrokaRecyclerViewAdapter;
 import com.air.foi.diabeticcalculatorapp.MainActivity;
 import com.air.foi.diabeticcalculatorapp.NamirniceObrokaDialog;
+import com.air.foi.diabeticcalculatorapp.NotificationPublisher;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.businessLogic.IzracunInzulina;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -203,23 +205,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                     }
                 }
 
-                // Show notification
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                intent.putExtra("openFragment","mjerenje_fragment");
-                PendingIntent pIntent = PendingIntent.getActivity(getContext(), (int) System.currentTimeMillis(), intent, 0);
-
-                // Build notification
-                android.app.Notification noti = new Notification.Builder(getContext())
-                        .setContentTitle("Podsjetnik za mjerenje glukoze")
-                        .setContentText("Izmjerite vrijednost glukoze.")
-                        .setContentIntent(pIntent)
-                        .setSmallIcon(R.drawable.ic_action_alarm_clock_48).build();
-                NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                // Hide notification after it is selected
-                noti.flags |= Notification.FLAG_AUTO_CANCEL;
-
-                notificationManager.notify(0, noti);
-
+                scheduleNotification(getNotification("Podsjetnik za mjerenje glukoze","Izmjerite vrijednost glukoze.","MjerenjaFragment"),2*60*60);
             }
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Odustani", new DialogInterface.OnClickListener() {
@@ -261,5 +247,42 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
         listaNamirnica.add(novaNamirnicaObroka);
         rvNamirnice.setAdapter(new NamirniceObrokaRecyclerViewAdapter(listaNamirnica, getContext()));
         ukupnoUgljikohidrata += (Double.parseDouble(kolicina) / 100) * novaNamirnica.getUgljikohidrati();
+    }
+
+    /**
+     * Schedules notification
+     * @param notification Notification object
+     * @param delay delay time in seconds
+     */
+    private void scheduleNotification(Notification notification, int delay){
+        Intent intent = new Intent(getContext(), NotificationPublisher.class);
+        intent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        intent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay*1000;
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+    /**
+     * Builds notification
+     * @param title notification title
+     * @param text notification text
+     * @param fragmentToOpen fragment to open on notification select
+     * @return Notification object
+     */
+    private Notification getNotification(String title, String text, String fragmentToOpen){
+        // Intent to open a fragment when notification is selected
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.putExtra("fragmentToOpen",fragmentToOpen);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), (int) System.currentTimeMillis(), intent, 0);
+
+        Notification.Builder builder = new Notification.Builder(getContext());
+        builder.setContentTitle(title);
+        builder.setContentText(text);
+        builder.setSmallIcon(R.drawable.ic_action_alarm_clock_48);
+        builder.setContentIntent(pendingIntent);
+        return builder.build();
     }
 }
