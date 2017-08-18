@@ -205,7 +205,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                     }
                 }
 
-                NotificationPublisher.scheduleNotification(getContext(),1,NotificationPublisher.getNotification(getContext(),MainActivity.class,"Podsjetnik za mjerenje glukoze","Izmjerite vrijednost glukoze.","UnosMjerenja"),/*2*60*6*/0);
+                NotificationPublisher.scheduleNotification(getContext(),1,NotificationPublisher.getNotification(getContext(),MainActivity.class,"Podsjetnik za mjerenje glukoze","Izmjerite vrijednost glukoze.","UnosMjerenja"),2*60*60);
             }
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Odustani", new DialogInterface.OnClickListener() {

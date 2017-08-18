@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    private boolean consumedIntent;
+    private final String SAVED_INSTANCE_STATE_CONSUMED_INTENT = "SAVED_INSTANCE_STATE_CONSUMED_INTENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if(savedInstanceState!=null) {
+            //Application is being reloaded
+            consumedIntent = savedInstanceState.getBoolean(SAVED_INSTANCE_STATE_CONSUMED_INTENT);
+        }
+
     }
 
     @Override
@@ -121,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Opens tab 3
         String actionToDo = getIntent().getStringExtra("actionToDo");
-        if(Objects.equals(actionToDo,"UnosMjerenja")) {
+        Intent intent = getIntent();
+        boolean launchedFromHistory = intent != null ? (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0 : false;
+        if(!launchedFromHistory && !consumedIntent && Objects.equals(actionToDo,"UnosMjerenja")) {
+            consumedIntent = true;
+            //Code that should be executed if the activity was not launched from history
             mFragmentTransaction = mFragmentManager.beginTransaction();
             TabFragment fragment = new TabFragment();
             Bundle bundle = new Bundle();
@@ -130,6 +141,12 @@ public class MainActivity extends AppCompatActivity {
             fragment.setArguments(bundle);
             mFragmentTransaction.replace(R.id.containerView, fragment).commit();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_INSTANCE_STATE_CONSUMED_INTENT,consumedIntent);
     }
 
     /**
