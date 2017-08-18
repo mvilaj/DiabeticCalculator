@@ -1,4 +1,4 @@
-package database;
+package com.foi.dbcal.common.model;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

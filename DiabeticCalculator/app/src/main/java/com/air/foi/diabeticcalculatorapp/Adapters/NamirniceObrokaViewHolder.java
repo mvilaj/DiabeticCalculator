@@ -9,7 +9,7 @@ import com.air.foi.diabeticcalculatorapp.R;
 
 import java.util.List;
 
-import entities.NamirniceObroka;
+import com.foi.dbcal.common.model.NamirniceObroka;
 
 /**
  * Created by nikra on 27.11.2016..

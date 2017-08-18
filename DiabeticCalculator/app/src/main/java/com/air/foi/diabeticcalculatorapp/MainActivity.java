@@ -11,21 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.preferences.CustomPreferencesActivity;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
-import java.util.List;
+import com.foi.dbcal.common.model.InitialDBLoader;
 
-import entities.DatabaseData;
-import entities.Namirnica;
-import fragment.IzracunFragment;
 import fragment.MjerenjaFragment;
-import fragment.OstalaStatistika;
-import fragment.StatisticChart;
 import fragment.TabFragment;
 import fragment.UnosUBazu;
 
@@ -57,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isfirstrun",true);
 
         if (isFirstRun){
-            DatabaseData.writeAll();
+            InitialDBLoader.writeAll();
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isfirstrun",false).commit();
         }
 

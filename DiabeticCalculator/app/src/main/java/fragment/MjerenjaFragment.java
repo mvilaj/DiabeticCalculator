@@ -21,13 +21,13 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import java.util.Date;
 import java.util.List;
 
-import entities.Obrok;
-import entities.Obrok_Table;
-import entities.OstalaMjerenja;
-import entities.TipMjerenja;
-import entities.TipMjerenja_Table;
-import entities.TipObroka;
-import entities.TipObroka_Table;
+import com.foi.dbcal.common.model.Obrok;
+import com.foi.dbcal.common.model.Obrok_Table;
+import com.foi.dbcal.common.model.OstalaMjerenja;
+import com.foi.dbcal.common.model.TipMjerenja;
+import com.foi.dbcal.common.model.TipMjerenja_Table;
+import com.foi.dbcal.common.model.TipObroka;
+import com.foi.dbcal.common.model.TipObroka_Table;
 
 /**
  * A simple {@link Fragment} subclass.

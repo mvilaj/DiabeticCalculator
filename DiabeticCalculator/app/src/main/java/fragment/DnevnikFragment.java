@@ -1,28 +1,19 @@
 package fragment;
 
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.air.foi.diabeticcalculatorapp.DnevnikDatePickerDialog;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.businessLogic.Dnevnik;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Date;
-import java.util.List;
-
-import entities.Obrok;
-import entities.Obrok_Table;
-import entities.TipObroka;
 
 /**
  * A simple {@link Fragment} subclass.

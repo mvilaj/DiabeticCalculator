@@ -1,7 +1,5 @@
 package com.air.foi.diabeticcalculatorapp.businessLogic;
 
-import android.widget.Toast;
-
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.text.Format;
@@ -9,13 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import entities.Obrok;
-import entities.Obrok_Table;
-import entities.OstalaMjerenja;
-import entities.OstalaMjerenja_Table;
-import entities.TipMjerenja;
-import entities.TipMjerenja_Table;
-import entities.TipObroka;
+import com.foi.dbcal.common.model.Obrok;
+import com.foi.dbcal.common.model.OstalaMjerenja;
+import com.foi.dbcal.common.model.OstalaMjerenja_Table;
+import com.foi.dbcal.common.model.TipMjerenja;
+import com.foi.dbcal.common.model.TipMjerenja_Table;
 
 /**
  * Created by Korisnik on 1/25/2017.

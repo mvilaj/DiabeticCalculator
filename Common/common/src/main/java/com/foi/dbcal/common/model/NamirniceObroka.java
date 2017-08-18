@@ -1,12 +1,10 @@
-package entities;
+package com.foi.dbcal.common.model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
-
-import database.DiabeticCalculatorDb;
 
 /**
  * Created by Mario on 11/6/2016.
@@ -59,19 +57,19 @@ public class NamirniceObroka extends BaseModel{
         Kolicina = kolicina;
     }
 
-    public entities.Obrok getObrok() {
+    public com.foi.dbcal.common.model.Obrok getObrok() {
         return Obrok;
     }
 
-    public void setObrok(entities.Obrok obrok) {
+    public void setObrok(com.foi.dbcal.common.model.Obrok obrok) {
         Obrok = obrok;
     }
 
-    public entities.Namirnica getNamirnica() {
+    public com.foi.dbcal.common.model.Namirnica getNamirnica() {
         return Namirnica;
     }
 
-    public void setNamirnica(entities.Namirnica namirnica) {
+    public void setNamirnica(com.foi.dbcal.common.model.Namirnica namirnica) {
         Namirnica = namirnica;
     }
 }

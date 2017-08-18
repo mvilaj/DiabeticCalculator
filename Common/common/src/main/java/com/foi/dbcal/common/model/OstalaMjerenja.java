@@ -1,4 +1,4 @@
-package entities;
+package com.foi.dbcal.common.model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
@@ -7,8 +7,6 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
-
-import database.DiabeticCalculatorDb;
 
 /**
  * Created by Mario on 11/6/2016.
@@ -63,11 +61,11 @@ public class OstalaMjerenja extends BaseModel{
         Datum = datum;
     }
 
-    public entities.TipMjerenja getTipMjerenja() {
+    public com.foi.dbcal.common.model.TipMjerenja getTipMjerenja() {
         return TipMjerenja;
     }
 
-    public void setTipMjerenja(entities.TipMjerenja tipMjerenja) {
+    public void setTipMjerenja(com.foi.dbcal.common.model.TipMjerenja tipMjerenja) {
         TipMjerenja = tipMjerenja;
     }
 

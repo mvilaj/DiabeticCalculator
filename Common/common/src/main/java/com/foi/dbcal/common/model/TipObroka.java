@@ -1,12 +1,10 @@
-package entities;
+package com.foi.dbcal.common.model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
-
-import database.DiabeticCalculatorDb;
 
 /**
  * Created by Mario on 11/6/2016.

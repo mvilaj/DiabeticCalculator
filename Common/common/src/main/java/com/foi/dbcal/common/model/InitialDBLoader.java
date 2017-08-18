@@ -1,4 +1,4 @@
-package entities;
+package com.foi.dbcal.common.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Danijel on 9.11.2016..
  */
 
-public class DatabaseData {
+public class InitialDBLoader {
 
     public static void writeAll(){
 

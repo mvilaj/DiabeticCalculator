@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import com.air.foi.diabeticcalculatorapp.R;
 
-import entities.Namirnica;
+import com.foi.dbcal.common.model.Namirnica;
 
 /**
  * A simple {@link Fragment} subclass.

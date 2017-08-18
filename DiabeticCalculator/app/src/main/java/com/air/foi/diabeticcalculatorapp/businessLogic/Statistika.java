@@ -4,8 +4,8 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
-import entities.Obrok;
-import entities.OstalaMjerenja;
+import com.foi.dbcal.common.model.Obrok;
+import com.foi.dbcal.common.model.OstalaMjerenja;
 
 /**
  * Created by Danijel on 7.12.2016..

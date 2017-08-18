@@ -1,7 +1,6 @@
 package fragment;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,16 +14,6 @@ import android.widget.Toast;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.businessLogic.StatisticChartData;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import entities.Obrok;
 
 /**
  * A simple {@link Fragment} subclass.

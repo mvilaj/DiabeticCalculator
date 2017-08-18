@@ -1,4 +1,4 @@
-package entities;
+package com.foi.dbcal.common.model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
@@ -7,8 +7,6 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
-
-import database.DiabeticCalculatorDb;
 
 /**
  * Created by Mario on 11/6/2016.
@@ -49,11 +47,11 @@ public class Obrok extends BaseModel{
         TipObroka = tipObroka;
     }
 
-    public entities.TipObroka getTipObroka() {
+    public com.foi.dbcal.common.model.TipObroka getTipObroka() {
         return TipObroka;
     }
 
-    public void setTipObroka(entities.TipObroka tipObroka) {
+    public void setTipObroka(com.foi.dbcal.common.model.TipObroka tipObroka) {
         TipObroka = tipObroka;
     }
 

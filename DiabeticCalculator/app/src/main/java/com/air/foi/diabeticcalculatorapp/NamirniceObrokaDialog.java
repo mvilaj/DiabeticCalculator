@@ -2,7 +2,6 @@ package com.air.foi.diabeticcalculatorapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +9,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.List;
 
-import entities.Namirnica;
+import com.foi.dbcal.common.model.Namirnica;
 
 /**
  * Created by nikra on 27.11.2016..

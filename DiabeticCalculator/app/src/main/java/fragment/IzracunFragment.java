@@ -39,10 +39,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import entities.Namirnica;
-import entities.NamirniceObroka;
-import entities.Obrok;
-import entities.TipObroka;
+import com.foi.dbcal.common.model.Namirnica;
+import com.foi.dbcal.common.model.NamirniceObroka;
+import com.foi.dbcal.common.model.Obrok;
+import com.foi.dbcal.common.model.TipObroka;
 
 
 /**
