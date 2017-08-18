@@ -21,7 +21,7 @@ public class TabFragment extends Fragment {
         public static TabLayout tabLayout;
         public static ViewPager viewPager;
         private int type;
-
+        private int page;
 
 
     @Nullable
@@ -29,15 +29,17 @@ public class TabFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             type = getArguments().getInt("TYPE");
+            page = getArguments().getInt("PAGE");
             View x = inflater.inflate(R.layout.fragment_tab, null);
             tabLayout = (TabLayout) x.findViewById(R.id.tabs);
             viewPager = (ViewPager) x.findViewById(R.id.viewpager);
 
 
             viewPager.setAdapter(new TabAdapter(getChildFragmentManager(), type));
+            viewPager.setCurrentItem(page);
 
 
-            tabLayout.post(new Runnable() {
+        tabLayout.post(new Runnable() {
                 @Override
                 public void run() {
                     tabLayout.setupWithViewPager(viewPager);

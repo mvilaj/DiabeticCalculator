@@ -39,7 +39,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder builder=new NotificationCompat.Builder(context);
         builder.setContentTitle("Vrijeme je da uzmete inzulin! ");
-        builder.setContentText("Uzmite " + inzulin + kolicina + "jedinica.");
+        builder.setContentText("Uzmite " + inzulin + kolicina + " jedinica.");
         builder.setSmallIcon(R.drawable.ic_action_alarm_clock_48);
         builder.setDefaults(Notification.DEFAULT_SOUND);
 

@@ -18,7 +18,8 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 
 import com.foi.dbcal.common.model.InitialDBLoader;
 
-import fragment.MjerenjaFragment;
+import java.util.Objects;
+
 import fragment.TabFragment;
 import fragment.UnosUBazu;
 
@@ -108,17 +109,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String fragmentToOpen = getIntent().getStringExtra("fragmentToOpen");
-
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-
-        // If fragmentToOpen is defined, load fragment
-        if(fragmentToOpen != null && fragmentToOpen.equals("MjerenjaFragment")){
-            MjerenjaFragment mjerenjaFragment = new MjerenjaFragment();
-            //mFragmentTransaction.addToBackStack(null);    // Exit background app
-            mFragmentTransaction.replace(R.id.containerView, mjerenjaFragment).commit();
-        }
     }
 
     @Override
@@ -127,6 +117,18 @@ public class MainActivity extends AppCompatActivity {
         if (!chechPreferences()){
             Intent i = new Intent(getApplicationContext(), CustomPreferencesActivity.class);
             startActivity(i);
+        }
+
+        //Opens tab 3
+        String actionToDo = getIntent().getStringExtra("actionToDo");
+        if(Objects.equals(actionToDo,"UnosMjerenja")) {
+            mFragmentTransaction = mFragmentManager.beginTransaction();
+            TabFragment fragment = new TabFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("TYPE", 1);
+            bundle.putInt("PAGE", 2);
+            fragment.setArguments(bundle);
+            mFragmentTransaction.replace(R.id.containerView, fragment).commit();
         }
     }
 
