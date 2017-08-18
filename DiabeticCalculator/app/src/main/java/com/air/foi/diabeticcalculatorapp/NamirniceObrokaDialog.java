@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -54,7 +55,11 @@ public class NamirniceObrokaDialog extends android.support.v4.app.DialogFragment
         builder.setPositiveButton(R.string.spremi, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                callback.dodanaNamirnica(spNamirnice.getSelectedItem().toString(), etKolicina.getText().toString());
+                if(!etKolicina.getText().toString().isEmpty()) {
+                    callback.dodanaNamirnica(spNamirnice.getSelectedItem().toString(), etKolicina.getText().toString());
+                }else {
+                    Toast.makeText(getContext(),"Količina mora biti unesena!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
