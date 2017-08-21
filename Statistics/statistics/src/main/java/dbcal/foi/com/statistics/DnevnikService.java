@@ -21,16 +21,6 @@ public class DnevnikService implements Dnevnik {
             mjerenje = "--";
         }else{
             for (OstalaMjerenja mn: mjerenjeNataste) {
-              /*  Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date datumMjerenja = mn.getDatum();
-                String datumMjerenjaString = formatter.format(mn.getDatum());
-                String zeljeniDatumString = formatter.format(datum);
-
-                if(datumMjerenjaString.equals(zeljeniDatumString)){
-                    mjerenje = Double.toString(mn.getGuk());
-                }else{
-                    mjerenje = "--";
-                }*/
                 mjerenje = Double.toString(mn.getGuk());
             }
 
@@ -44,10 +34,6 @@ public class DnevnikService implements Dnevnik {
         List<Obrok> listMjerenjaZaObroke = DnevnikHelper.getListaMjerenjaObrok(datum);
 
         for (Obrok o: listMjerenjaZaObroke){
-
-          /*  Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String datumMjerenjaString = formatter.format(o.getDatum());
-            String zeljeniDatumString = formatter.format(datum);*/
 
             if (o.getTipObroka().getNaziv().equals("Doručak"))
             {
@@ -70,10 +56,6 @@ public class DnevnikService implements Dnevnik {
         List<Obrok> listMjerenjaZaObroke = DnevnikHelper.getListaMjerenjaObrok(datum);
 
         for (Obrok o: listMjerenjaZaObroke){
-
-          /*  Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String datumMjerenjaString = formatter.format(o.getDatum());
-            String zeljeniDatumString = formatter.format(datum);*/
 
             if (o.getTipObroka().getNaziv().equals("Doručak"))
             {
@@ -98,9 +80,6 @@ public class DnevnikService implements Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-          /*  Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String datumMjerenjaString = formatter.format(o.getDatum());
-            String zeljeniDatumString = formatter.format(datum);*/
 
             if (o.getTipObroka().getNaziv().equals("Ručak"))
             {
@@ -125,10 +104,6 @@ public class DnevnikService implements Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-          /*  Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String datumMjerenjaString = formatter.format(o.getDatum());
-            String zeljeniDatumString = formatter.format(datum);*/
-
             if (o.getTipObroka().getNaziv().equals("Ručak"))
             {
                 if (o.getGukPrije() == 0){
@@ -152,10 +127,6 @@ public class DnevnikService implements Dnevnik {
 
         for (Obrok o: listMjerenjaZaObroke){
 
-           /* Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String datumMjerenjaString = formatter.format(o.getDatum());
-            String zeljeniDatumString = formatter.format(datum);*/
-
             if (o.getTipObroka().getNaziv().equals("Večera"))
             {
                 if (o.getGukNakon() == 0){
@@ -178,10 +149,6 @@ public class DnevnikService implements Dnevnik {
         List<Obrok> listMjerenjaZaObroke = DnevnikHelper.getListaMjerenjaObrok(datum);
 
         for (Obrok o: listMjerenjaZaObroke){
-
-           /* Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String datumMjerenjaString = formatter.format(o.getDatum());
-            String zeljeniDatumString = formatter.format(datum);*/
 
             if (o.getTipObroka().getNaziv().equals("Večera"))
             {

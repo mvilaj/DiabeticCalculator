@@ -79,24 +79,31 @@ public class InitialDBLoader {
         mjerenje2.save();
 
         String stringDatum2 = "2016-10-16";
+        Date datum3 = new Date();
         try {
-            datum2 = df.parse(stringDatum2);
+            datum3 = df.parse(stringDatum2);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        OstalaMjerenja mjerenje3 = new OstalaMjerenja(datum2, nataste, 8.6);
+
+        String stringDatum4 = "2017-05-16";
+        Date datum4 = new Date();
+        try {
+            datum4 = df.parse(stringDatum4);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        OstalaMjerenja mjerenje3 = new OstalaMjerenja(datum3, nataste, 8.6);
         mjerenje3.save();
 
-        OstalaMjerenja mjerenje1 = new OstalaMjerenja(datum, nataste, 5.6);
+        OstalaMjerenja mjerenje1 = new OstalaMjerenja(datum4, nataste, 5.6);
         mjerenje1.save();
 
-        Obrok o1 = new Obrok (datum, 7.0, 8.9, 50, dorucak);
+        Obrok o1 = new Obrok (datum2, 7.0, 8.9, 50, dorucak);
         o1.save();
-        Obrok o2 = new Obrok (datum2, 6.5, 8.0, 60, rucak);
+        Obrok o2 = new Obrok (datum3, 6.5, 8.0, 60, rucak);
         o2.save();
-        Obrok o3 = new Obrok (datum, 5.0, 6.9, 50, vecera);
+        Obrok o3 = new Obrok (datum4, 5.0, 6.9, 50, vecera);
         o3.save();
-
-
     }
 }

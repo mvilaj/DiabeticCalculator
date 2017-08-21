@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.air.foi.diabeticcalculatorapp.R;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -92,7 +94,16 @@ public class MjerenjaFragment extends Fragment {
             public void onClick(View v) {
                 if(gukEntered()){
                     double guk = Double.parseDouble(etGuk.getText().toString());
-                    Date datum = new Date();
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date datumDanas = null;
+                    try {
+                        datumDanas = sdf.parse(sdf.format(new Date()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    final Date finalDatumDanas = datumDanas;
 
                     String nazivMjerenja = spTipMjerenja.getSelectedItem().toString();
                     TipMjerenja mjerenje = SQLite.select()
@@ -105,19 +116,19 @@ public class MjerenjaFragment extends Fragment {
 
                     switch (spTipMjerenja.getSelectedItemPosition()){
                         case 0:
-                            OstalaMjerenja novoMjerenje = new OstalaMjerenja(datum, mjerenje, guk);
+                            OstalaMjerenja novoMjerenje = new OstalaMjerenja(finalDatumDanas, mjerenje, guk);
                             novoMjerenje.save();
                             showMessage("Novo mjerenje natašte je dodano u bazu!");
                             break;
                         case 1:
-                            OstalaMjerenja novoMjerenje2 = new OstalaMjerenja(datum, mjerenje, guk);
+                            OstalaMjerenja novoMjerenje2 = new OstalaMjerenja(finalDatumDanas, mjerenje, guk);
                             novoMjerenje2.save();
                             showMessage("Novo mjerenje kategorije ostalo je dodano u bazu!");
                             break;
                         case 2:
                             Obrok obrok = SQLite.select()
                                     .from(Obrok.class)
-                                    .where(Obrok_Table.Datum.eq(datum))
+                                    .where(Obrok_Table.Datum.eq(finalDatumDanas))
                                     .and(Obrok_Table.TipObroka_id.is(tipObroka.getId()))
                                     .and(Obrok_Table.GukNakon.is(0.0)).querySingle();
 
@@ -125,7 +136,7 @@ public class MjerenjaFragment extends Fragment {
                                 obrok.setGukNakon(guk);
                                 obrok.save();
                             } else {
-                                Obrok noviObrok = new Obrok(datum, 0.0, guk, 0.0, tipObroka);
+                                Obrok noviObrok = new Obrok(finalDatumDanas, 0.0, guk, 0.0, tipObroka);
                             }
                             showMessage("Novo mjerenje nakon obroka je dodano u bazu!");
                             break;

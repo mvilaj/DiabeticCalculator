@@ -35,6 +35,8 @@ import com.air.foi.diabeticcalculatorapp.R;
 import com.air.foi.diabeticcalculatorapp.businessLogic.IzracunInzulina;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -183,6 +185,16 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
      */
     private void prikaziDialog(int kolicinaInzulina) {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date datumDanas = null;
+        try {
+            datumDanas = sdf.parse(sdf.format(new Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        final Date finalDatumDanas = datumDanas;
+
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("Info");
         alertDialog.setMessage("Potrebno je uzeti " + inzulin + kolicinaInzulina + " jedinica.");
@@ -191,12 +203,12 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
             public void onClick(DialogInterface dialog, int which) {
 
                 if (cbPoznatiUgljikohidrati.isChecked()){
-                    Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, uneseniUgljikohodrati, tipObroka);
+                    Obrok noviObrok = new Obrok(finalDatumDanas, uneseniGuk, 0.0, uneseniUgljikohodrati, tipObroka);
                     noviObrok.save();
                     etGuk.setText("");
                     etUgljikohidrati.setText("");
                 }else{
-                    Obrok noviObrok = new Obrok(new Date(), uneseniGuk, 0.0, ukupnoUgljikohidrata, tipObroka);
+                    Obrok noviObrok = new Obrok(finalDatumDanas, uneseniGuk, 0.0, ukupnoUgljikohidrata, tipObroka);
                     noviObrok.save();
 
                     for (NamirniceObroka no: listaNamirnica){
