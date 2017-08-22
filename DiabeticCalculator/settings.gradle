@@ -1,8 +1,10 @@
 include ':app'
 include ':common'
 include ':statistics'
+include ':administration'
 
 
 project(':common').projectDir = new File (settingsDir, '../Common/common')
 project(':statistics').projectDir = new File (settingsDir, '../Statistics/statistics')
+project(':administration').projectDir = new File (settingsDir, '../Administration/administration')
 

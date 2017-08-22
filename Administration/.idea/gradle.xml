@@ -8,11 +8,8 @@
         <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.14.1" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../Administration/administration" />
-            <option value="$PROJECT_DIR$/../Common/common" />
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../Statistics/statistics" />
+            <option value="$PROJECT_DIR$/administration" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
