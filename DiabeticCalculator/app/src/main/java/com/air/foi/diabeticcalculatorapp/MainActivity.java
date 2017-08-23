@@ -21,7 +21,7 @@ import com.foi.dbcal.common.model.InitialDBLoader;
 import java.util.Objects;
 
 import fragment.TabFragment;
-import fragment.UnosUBazu;
+import fragment.UnosNamirniceFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_unos:
                         FragmentTransaction fragmentTransaction2 = mFragmentManager.beginTransaction();
-                        fragmentTransaction2.replace(R.id.containerView,new UnosUBazu()).commit();
+                        fragmentTransaction2.replace(R.id.containerView,new UnosNamirniceFragment()).commit();
                         return true;
                 }
                 return true;

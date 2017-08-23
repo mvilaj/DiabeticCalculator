@@ -20,13 +20,13 @@ import com.foi.dbcal.common.model.Namirnica;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UnosUBazu extends Fragment {
+public class UnosNamirniceFragment extends Fragment {
 
     private EditText etNamirnica;
     private EditText etKolicinaCarb;
     private Button btnSpremi;
 
-    public UnosUBazu() {
+    public UnosNamirniceFragment() {
         // Required empty public constructor
     }
 
