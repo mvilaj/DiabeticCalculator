@@ -10,7 +10,7 @@ public class IzracunInzulinaService implements IzracunInzulina {
 
     public int getKolicinaInzulinaZaObrok (double ugljikohidrati, double guk, Context context)
     {
-        int kolicinaInzulina = (int)(Math.ceil(ugljikohidrati)/IzracunInzulinaHelper.getFakrotPokricaUgljikohidrata(context)+(guk-5.5)/IzracunInzulinaHelper.getFaktorOsjetljivosto(context));
+        int kolicinaInzulina = (int)(Math.ceil(ugljikohidrati)/IzracunInzulinaHelper.getFakrotPokricaUgljikohidrata(context)+(guk-5.5)/IzracunInzulinaHelper.getFaktorOsjetljivosti(context));
         return kolicinaInzulina;
     }
 
