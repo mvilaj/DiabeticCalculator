@@ -137,6 +137,7 @@ public class MjerenjaFragment extends Fragment {
                                 obrok.save();
                             } else {
                                 Obrok noviObrok = new Obrok(finalDatumDanas, 0.0, guk, 0.0, tipObroka);
+                                noviObrok.save();
                             }
                             showMessage("Novo mjerenje nakon obroka je dodano u bazu!");
                             break;

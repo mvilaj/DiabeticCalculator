@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TableStatistics.iml" filepath="$PROJECT_DIR$/TableStatistics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tableStatistics/tableStatistics.iml" filepath="$PROJECT_DIR$/tableStatistics/tableStatistics.iml" />
+    </modules>
+  </component>
+</project>

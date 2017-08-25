@@ -7,13 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../Administration/administration" />
-            <option value="$PROJECT_DIR$/../Calculation/calculation" />
-            <option value="$PROJECT_DIR$/../Common/common" />
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../Statistics/statistics" />
-            <option value="$PROJECT_DIR$/../TableStatistics/tableStatistics" />
+            <option value="$PROJECT_DIR$/tableStatistics" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

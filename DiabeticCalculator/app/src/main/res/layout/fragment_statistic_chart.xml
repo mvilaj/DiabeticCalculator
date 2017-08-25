@@ -5,25 +5,54 @@
     tools:context="fragment.StatisticChart"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Odaberite vrstu grafa: "/>
+    <ScrollView
 
-    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spStatisticTyp"></Spinner>
 
-    <TextView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prikaz odabranog grafa: "/>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:id="@+id/lineChart"></com.github.mikephil.charting.charts.LineChart>
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Odaberite vrstu grafa: "
+                />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spStatisticTyp"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prikaz odabranog grafa: "/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:id="@+id/lineChart"></com.github.mikephil.charting.charts.LineChart>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tablica:"
+                android:textStyle="bold"
+                android:textSize="20px"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/statTable"
+                android:layout_gravity="center"></TableLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>
