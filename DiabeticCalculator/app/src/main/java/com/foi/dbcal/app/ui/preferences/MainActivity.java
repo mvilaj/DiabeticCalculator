@@ -11,8 +11,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
+import com.foi.dbcal.connector.ServiceLocator;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -94,13 +96,19 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.nav_statistika:
-                        FragmentTransaction fragmentTransaction3 = mFragmentManager.beginTransaction();
-                        TabFragment fragmentStat = new TabFragment();
-                        Bundle bundleStat = new Bundle();
-                        bundleStat.putInt("TYPE", 2);
-                        fragmentStat.setArguments(bundleStat);
-                        fragmentTransaction3.replace(R.id.containerView,fragmentStat).commit();
-                        return true;
+                        if(ServiceLocator.statistikaServiceExists()){
+                            FragmentTransaction fragmentTransaction3 = mFragmentManager.beginTransaction();
+                            TabFragment fragmentStat = new TabFragment();
+                            Bundle bundleStat = new Bundle();
+                            bundleStat.putInt("TYPE", 2);
+                            fragmentStat.setArguments(bundleStat);
+                            fragmentTransaction3.replace(R.id.containerView,fragmentStat).commit();
+                            return true;
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
 
                     case R.id.nav_unos:
                         FragmentTransaction fragmentTransaction2 = mFragmentManager.beginTransaction();

@@ -9,22 +9,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
-import com.air.dbcal.app.businessLogic.StatisticChartData;
 import com.github.mikephil.charting.charts.LineChart;
+
+import com.foi.dbcal.statistics.StatisticChartData;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StatisticChart extends Fragment {
+public class StatisticChartFragment extends Fragment {
 
 
     private Spinner spStatisticType;
     public LineChart linearChart;
 
-    public StatisticChart() {
+    public StatisticChartFragment() {
         // Required empty public constructor
     }
 
@@ -60,7 +60,6 @@ public class StatisticChart extends Fragment {
                        linearChart.setData(StatisticChartData.getNatasteChartData());
                        break;
                    case 1:
-                       Toast.makeText(getActivity(), "Prije obroka", Toast.LENGTH_SHORT).show();
                        linearChart.clear();
                        linearChart.setData(StatisticChartData.getBeforeMealChartData());
                        break;

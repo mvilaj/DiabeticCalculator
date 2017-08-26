@@ -52,4 +52,14 @@ public class ServiceLocator {
             throw new ServiceNotFoundException("Ne mogu locirati servis");
         }
     }
+
+    public static boolean statistikaServiceExists(){
+        try{
+            Class.forName("com.foi.dbcal.statistics.StatistikaService");
+            return true;
+        } catch (Exception e){
+            e. printStackTrace();
+            return false;
+        }
+    }
 }

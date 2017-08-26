@@ -13,19 +13,17 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.foi.dbcal.common.service.StatisticChartData;
-
 /**
  * Created by nikra on 08/21/17.
  */
 
-public class StatisticChartDataService implements StatisticChartData {
+public class StatisticChartData {
     /**
      * Metoda dohvaća podatke iz baze podatka koji su potrebni
      * za grafički prikaz GUKA natašte
      * @return LIneData za GUK natašte
      */
-    public LineData getNatasteChartData(){
+    public static LineData getNatasteChartData(){
 
         final List<OstalaMjerenja> mjerenjaNataste= SQLite.select()
                 .from(OstalaMjerenja.class)
@@ -66,7 +64,7 @@ public class StatisticChartDataService implements StatisticChartData {
      * za grafički prikaz GUKA prije oborka
      * @return LineData za GUK prije obroka
      */
-    public LineData getBeforeMealChartData(){
+    public static LineData getBeforeMealChartData(){
 
         final List<Obrok> mjerenjaPrije = SQLite.select()
                 .from(Obrok.class).queryList();
@@ -107,7 +105,7 @@ public class StatisticChartDataService implements StatisticChartData {
      * za grafički prikaz GUKA nakon oborka
      * @return LIneData za GUK nakon obroka
      */
-    public LineData getAfterMealChartData(){
+    public static LineData getAfterMealChartData(){
 
         final List<Obrok> mjerenjaNakon= SQLite.select()
                 .from(Obrok.class).queryList();
