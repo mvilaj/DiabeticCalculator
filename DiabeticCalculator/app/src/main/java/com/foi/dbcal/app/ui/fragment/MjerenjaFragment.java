@@ -93,6 +93,7 @@ public class MjerenjaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(gukEntered()){
+
                     double guk = Double.parseDouble(etGuk.getText().toString());
 
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -145,7 +146,7 @@ public class MjerenjaFragment extends Fragment {
                             break;
                     }
                 } else {
-                    showMessage("Polje GUK mora biti uneseno!");
+                    showMessage("Polje GUK mora biti uneseno ili ste unijeli krivi znak!");
                 }
             }
         });
@@ -180,9 +181,10 @@ public class MjerenjaFragment extends Fragment {
     }
 
     private boolean gukEntered(){
-        if(etGuk.getText().toString().equals("")){
+        if(etGuk.getText().toString().equals("") || etGuk.getText().toString().equals(".")){
             return false;
-        } else {
+        }
+        else {
             return true;
         }
     }

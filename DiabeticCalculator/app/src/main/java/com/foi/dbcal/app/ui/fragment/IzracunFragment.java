@@ -164,8 +164,8 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                 }
             }
         }else {
-            if (etGuk.getText().toString().equals("")){
-                Toast.makeText(getActivity(), "Polje guk je obavezno!!", Toast.LENGTH_LONG).show();
+            if (etGuk.getText().toString().equals("")|| etGuk.getText().toString().equals(".")){
+                Toast.makeText(getActivity(), "Polje guk je obavezno ili ste unjeli krivi znak!!", Toast.LENGTH_LONG).show();
             }else{
                 try {
                     kolicinaInzulina = ServiceLocator.getIzracunInzulina().getKolicinaInzulinaZaObrok(ukupnoUgljikohidrata, uneseniGuk, getActivity());
@@ -175,6 +175,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                     Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
                 }
             }
+
         }
 
 
