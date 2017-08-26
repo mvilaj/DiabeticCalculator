@@ -32,4 +32,12 @@
         android:entryValues="@array/dugodjelujuciValues"
         android:defaultValue="2"
         />
+
+    <CheckBoxPreference
+        android:key="vrstaStatistike"
+        android:title="Grafički prikaz"
+        android:summary="Vrsta statističkog prikaza"
+        android:defaultValue="true"
+        />
+
 </PreferenceScreen>

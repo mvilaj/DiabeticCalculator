@@ -9,7 +9,7 @@ import com.foi.dbcal.app.ui.fragment.IzracunFragment;
 import com.foi.dbcal.app.ui.fragment.MjerenjaFragment;
 import com.foi.dbcal.app.ui.fragment.OstalaStatistikaFragment;
 import com.foi.dbcal.app.ui.fragment.PocetniFragment;
-import com.foi.dbcal.app.ui.fragment.StatisticChartFragment;
+import com.foi.dbcal.app.ui.fragment.StatistikaFragment;
 
 /**
  * Created by Danijel on 11.11.2016..
@@ -42,7 +42,7 @@ public class TabAdapter extends FragmentPagerAdapter {
                 case 0:
                     return new OstalaStatistikaFragment();
                 case 1:
-                    return new StatisticChartFragment();
+                    return new StatistikaFragment();
                 case 2:
                     return new DnevnikFragment();
             }

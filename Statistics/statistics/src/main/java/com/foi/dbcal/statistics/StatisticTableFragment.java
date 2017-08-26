@@ -1,4 +1,4 @@
-package com.foi.dbcal.app.ui.fragment;
+package com.foi.dbcal.statistics;
 
 
 import android.os.Bundle;
@@ -9,22 +9,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 
-import com.foi.dbcal.app.R;
+import com.foi.dbcal.common.service.StatistikaPrikazInterface;
 import com.github.mikephil.charting.charts.LineChart;
 
-import com.foi.dbcal.statistics.StatisticChartData;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StatisticChartFragment extends Fragment {
-
+public class StatisticTableFragment extends Fragment implements StatistikaPrikazInterface {
 
     private Spinner spStatisticType;
-    public LineChart linearChart;
-
-    public StatisticChartFragment() {
+    private TableLayout statisticTable;
+    public StatisticTableFragment() {
         // Required empty public constructor
     }
 
@@ -32,11 +30,10 @@ public class StatisticChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_statistic_chart, container, false);
+        View v = inflater.inflate(R.layout.fragment_statistic_table, container, false);
 
         initWidgets(v);
         setUpListeners();
-
 
         String[] statisticiArray = getResources().getStringArray(R.array.statisticiArray);
         ArrayAdapter adapterStatisticType = new ArrayAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, statisticiArray);
@@ -45,54 +42,41 @@ public class StatisticChartFragment extends Fragment {
         return  v;
     }
 
-    /**
-     * Metoda koja postavlja listenere na kontrole.
-     */
     private void setUpListeners() {
-
         spStatisticType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               switch (i){
-                   case 0:
-                       linearChart.clear();
-                       linearChart.setData(StatisticChartData.getNatasteChartData());
-                       break;
-                   case 1:
-                       linearChart.clear();
-                       linearChart.setData(StatisticChartData.getBeforeMealChartData());
-                       break;
-                   case 2:
-                       linearChart.clear();
-                       linearChart.setData(StatisticChartData.getAfterMealChartData());
-                       break;
-                   default:
-                       linearChart.clear();
-                       linearChart.setData(StatisticChartData.getNatasteChartData());
-                       break;
-               }
+                switch (i){
+                    case 0:
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    default:
+
+                        break;
+                }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                linearChart.clear();
-                linearChart.setData(StatisticChartData.getNatasteChartData());
+
             }
         });
-
     }
 
-
-    /**
-     * Metoda koja inicijalizira kontrole.
-     * @param v View
-     */
     private void initWidgets(View v) {
-
         spStatisticType = (Spinner) v.findViewById(R.id.spStatisticTyp);
-        linearChart = (LineChart) v.findViewById(R.id.lineChart);
+        statisticTable = (TableLayout) v.findViewById(R.id.statisticTable);
     }
 
+    @Override
+    public Fragment getFragment() {
+        return this;
+    }
 }
