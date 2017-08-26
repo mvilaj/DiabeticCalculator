@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/../Calculation/calculation/calculation.iml" filepath="$PROJECT_DIR$/../Calculation/calculation/calculation.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Common/common/common.iml" filepath="$PROJECT_DIR$/../Common/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Statistics/statistics/statistics.iml" filepath="$PROJECT_DIR$/../Statistics/statistics/statistics.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../TableStatistics/tableStatistics/tableStatistics.iml" filepath="$PROJECT_DIR$/../TableStatistics/tableStatistics/tableStatistics.iml" />
     </modules>
   </component>
 </project>

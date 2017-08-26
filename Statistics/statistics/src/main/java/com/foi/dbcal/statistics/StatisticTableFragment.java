@@ -10,9 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 
 import com.foi.dbcal.common.service.StatistikaPrikazInterface;
 import com.github.mikephil.charting.charts.LineChart;
+
+import java.util.List;
 
 
 /**
@@ -22,6 +25,8 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
 
     private Spinner spStatisticType;
     private TableLayout statisticTable;
+    private TableRow tableHeader;
+    private List<TableRow> listRows;
     public StatisticTableFragment() {
         // Required empty public constructor
     }
@@ -46,18 +51,52 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
         spStatisticType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TableDataHelper tdh = new TableDataHelper();
 
                 switch (i){
                     case 0:
+                        statisticTable.removeAllViews();
+                        tableHeader = tdh.getTableHeader(getFragment().getContext());
+                        statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+                        listRows = tdh.getNatasteTableRows(getFragment().getContext());
+
+                        for (TableRow tr: listRows) {
+                            statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        }
                         break;
                     case 1:
+                        statisticTable.removeAllViews();
+                        tableHeader = tdh.getTableHeader(getFragment().getContext());
+                        statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
+                        listRows = tdh.getPrijeTableRows(getFragment().getContext());
+
+                        for (TableRow tr: listRows) {
+                            statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        }
                         break;
                     case 2:
+                        statisticTable.removeAllViews();
+                        tableHeader = tdh.getTableHeader(getFragment().getContext());
+                        statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
+                        listRows = tdh.getNakonTableRows(getFragment().getContext());
+
+                        for (TableRow tr: listRows) {
+                            statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        }
                         break;
                     default:
+                        statisticTable.removeAllViews();
+                        tableHeader = tdh.getTableHeader(getFragment().getContext());
+                        statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
+                        listRows = tdh.getNatasteTableRows(getFragment().getContext());
+
+                        for (TableRow tr: listRows) {
+                            statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                        }
                         break;
                 }
 
@@ -65,7 +104,15 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                TableDataHelper tdh = new TableDataHelper();
+                tableHeader = tdh.getTableHeader(getFragment().getContext());
+                statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
+                listRows = tdh.getNatasteTableRows(getFragment().getContext());
+
+                for (TableRow tr: listRows) {
+                    statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                }
             }
         });
     }

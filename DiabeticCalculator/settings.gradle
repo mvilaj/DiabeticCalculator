@@ -3,10 +3,8 @@ include ':common'
 include ':statistics'
 include ':administration'
 include ':calculation'
-include ':tableStatistics'
 
 project(':common').projectDir = new File (settingsDir, '../Common/common')
 project(':statistics').projectDir = new File (settingsDir, '../Statistics/statistics')
 project(':administration').projectDir = new File (settingsDir, '../Administration/administration')
 project(':calculation').projectDir= new File (settingsDir, '../Calculation/calculation')
-project(':tableStatistics').projectDir= new File (settingsDir, '../TableStatistics/tableStatistics')
