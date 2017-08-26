@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
 
 import com.foi.dbcal.common.model.Namirnica;
+import com.foi.dbcal.connector.ServiceLocator;
+import com.foi.dbcal.connector.ServiceNotFoundException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,11 +50,16 @@ public class UnosNamirniceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkInput()){
-                    Namirnica novaNamirnica = new Namirnica(etNamirnica.getText().toString(), Double.parseDouble(etKolicinaCarb.getText().toString()));
-                    novaNamirnica.save();
-                    prikaziPoruku("Nova namirnica je dodana u bazu!!");
-                    pocistiWidgete();
-                    btnSpremi.requestFocus();
+                    try {
+                        ServiceLocator.getUnosNamirnice().saveNamirnica(etNamirnica.getText().toString(), Double.parseDouble(etKolicinaCarb.getText().toString()));
+                        prikaziPoruku("Nova namirnica je dodana u bazu!!");
+                        pocistiWidgete();
+                        btnSpremi.requestFocus();
+                    } catch (ServiceNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }else {
                     prikaziPoruku("Polje namirnica i kolicina ugljikohidrata moraju biti uneseni!!");
                 }
