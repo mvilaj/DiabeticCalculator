@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
-import com.air.dbcal.app.businessLogic.Statistika;
+import com.foi.dbcal.connector.ServiceLocator;
+import com.foi.dbcal.connector.ServiceNotFoundException;
 
 import java.text.DecimalFormat;
 
@@ -33,9 +35,13 @@ public class PocetniFragment extends Fragment {
 
 
         tvHBA1C=(TextView) v.findViewById(R.id.tvHBA1C);
-        Statistika hb=new Statistika();
 
-        ispis=hb.setHBA1C();
+        try {
+            ispis = ServiceLocator.getStatistika().setHBA1C();
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
 
         DecimalFormat decimal=new DecimalFormat("#,##");
         double hba1c=Double.valueOf(decimal.format(ispis));

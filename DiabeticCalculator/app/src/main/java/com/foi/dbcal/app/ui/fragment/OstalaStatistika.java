@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
-import com.air.dbcal.app.businessLogic.Statistika;
+import com.foi.dbcal.connector.ServiceLocator;
+import com.foi.dbcal.connector.ServiceNotFoundException;
 
 import java.text.DecimalFormat;
 
@@ -36,9 +38,13 @@ public class OstalaStatistika extends Fragment {
         View v=inflater.inflate(R.layout.fragment_ostala_statistika,container,false);
        //ispis prosjeka guk-a nataste
         tvGukNataste=(TextView) v.findViewById(R.id.tvGukNataste);
-        Statistika stats=new Statistika();
 
-        ispis1=stats.prosjekGukNataste();
+        try {
+            ispis1= ServiceLocator.getStatistika().prosjekGukNataste();
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
 
         DecimalFormat decimal=new DecimalFormat("#,##");
         double nataste=Double.valueOf(decimal.format(ispis1));
@@ -48,7 +54,12 @@ public class OstalaStatistika extends Fragment {
 
         tvGukPrijeObroka=(TextView) v.findViewById(R.id.tvGukPrijeObroka);
 
-        ispis2=stats.prosjekGukPrijeObroka();
+        try {
+            ispis2=ServiceLocator.getStatistika().prosjekGukPrijeObroka();
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
 
         DecimalFormat decimal2=new DecimalFormat("#,##");
         double prije=Double.valueOf(decimal2.format(ispis2));
@@ -58,7 +69,12 @@ public class OstalaStatistika extends Fragment {
 
         tvGukPoslijeObroka=(TextView) v.findViewById(R.id.tvGukPoslijeObroka);
 
-        ispis3=stats.prosjekGukNakonObroka();
+        try {
+            ispis3=ServiceLocator.getStatistika().prosjekGukNakonObroka();
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
 
         DecimalFormat decimal3=new DecimalFormat("#,##");
         double poslije=Double.valueOf(decimal3.format(ispis3));

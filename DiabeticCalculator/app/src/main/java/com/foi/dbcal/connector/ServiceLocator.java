@@ -1,6 +1,7 @@
 package com.foi.dbcal.connector;
 
 import com.foi.dbcal.common.service.IzracunInzulina;
+import com.foi.dbcal.common.service.Statistika;
 import com.foi.dbcal.common.service.UnosNamirnice;
 
 /**
@@ -29,6 +30,16 @@ public class ServiceLocator {
             throw new ServiceNotFoundException("Ne mogu locirati servis");
         }
 
+    }
+
+    public static Statistika getStatistika() throws ServiceNotFoundException {
+        try {
+            Class c = Class.forName("com.foi.dbcal.statistics.StatistikaService");
+            return (Statistika) c.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServiceNotFoundException("Ne mogu locirati servis");
+        }
     }
 
 
