@@ -6,7 +6,7 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
-import service.Statistika;
+import com.foi.dbcal.common.service.Statistika;
 
 /**
  * Created by nikra on 08/21/17.

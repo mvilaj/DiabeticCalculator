@@ -24,7 +24,7 @@ public class IzracunInzulinaHelper {
     /**
      * Metoda koja izracunava koliko ugljikohidrata
      * pokriva jedna jedinica inzulina
-     * @param context kontekst aplikacije
+     * @param cont kontekst aplikacije
      * @return faktor pokrica inzulina
      */
     public static double getFakrotPokricaUgljikohidrata (Context cont)

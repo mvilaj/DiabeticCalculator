@@ -13,7 +13,7 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import java.util.ArrayList;
 import java.util.List;
 
-import service.StatisticChartData;
+import com.foi.dbcal.common.service.StatisticChartData;
 
 /**
  * Created by nikra on 08/21/17.

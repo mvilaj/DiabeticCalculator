@@ -1,6 +1,6 @@
 package com.foi.dbcal.administration;
 
-import service.UnosNamirnice;
+import com.foi.dbcal.common.service.UnosNamirnice;
 import com.foi.dbcal.common.model.Namirnica;
 
 /**

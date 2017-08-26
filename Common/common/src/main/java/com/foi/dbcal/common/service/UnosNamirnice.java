@@ -1,4 +1,4 @@
-package service;
+package com.foi.dbcal.common.service;
 
 /**
  * Created by Danijel on 22.8.2017..

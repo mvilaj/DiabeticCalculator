@@ -6,7 +6,7 @@ import com.foi.dbcal.common.model.OstalaMjerenja;
 import java.util.Date;
 import java.util.List;
 
-import service.Dnevnik;
+import com.foi.dbcal.common.service.Dnevnik;
 
 /**
  * Created by nikra on 08/21/17.

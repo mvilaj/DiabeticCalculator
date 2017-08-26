@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import service.TableData;
+import com.foi.dbcal.common.service.TableData;
 
 /**
  * Created by nikra on 08/25/17.

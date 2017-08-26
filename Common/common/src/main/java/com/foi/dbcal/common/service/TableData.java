@@ -1,4 +1,4 @@
-package service;
+package com.foi.dbcal.common.service;
 
 import android.content.Context;
 import android.widget.TableRow;
