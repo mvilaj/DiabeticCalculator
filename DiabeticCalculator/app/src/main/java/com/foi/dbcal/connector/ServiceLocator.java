@@ -1,5 +1,6 @@
 package com.foi.dbcal.connector;
 
+import com.foi.dbcal.common.service.Dnevnik;
 import com.foi.dbcal.common.service.IzracunInzulina;
 import com.foi.dbcal.common.service.Statistika;
 import com.foi.dbcal.common.service.UnosNamirnice;
@@ -42,5 +43,13 @@ public class ServiceLocator {
         }
     }
 
-
+    public static Dnevnik getDnevnik() throws ServiceNotFoundException {
+        try {
+            Class c = Class.forName("com.foi.dbcal.statistics.DnevnikService");
+            return (Dnevnik) c.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServiceNotFoundException("Ne mogu locirati servis");
+        }
+    }
 }

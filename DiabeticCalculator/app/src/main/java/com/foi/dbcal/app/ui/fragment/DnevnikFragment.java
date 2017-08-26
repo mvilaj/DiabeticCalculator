@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foi.dbcal.app.ui.preferences.DnevnikDatePickerDialog;
 import com.foi.dbcal.app.R;
-import com.air.dbcal.app.businessLogic.Dnevnik;
+import com.foi.dbcal.connector.ServiceLocator;
+import com.foi.dbcal.connector.ServiceNotFoundException;
 
 import java.util.Date;
 
@@ -81,13 +83,18 @@ public class DnevnikFragment extends Fragment implements DnevnikDatePickerDialog
     @Override
     public void odabranDatum(Date datum) {
 
-        txtGukNataste.setText(Dnevnik.getMjerenjeNatasteNaDatum(datum));
-        txtGukDorucakPrije.setText(Dnevnik.getGukPrijeDorucka(datum));
-        txtGukDorucakNakon.setText(Dnevnik.getGukNakonDorucka(datum));
-        txtGukRucakPrije.setText(Dnevnik.getGukPrijeRucka(datum));
-        txtGukRucakNakon.setText(Dnevnik.getGukNakonRucka(datum));
-        txtGukVeceraPrije.setText(Dnevnik.getGukPrijeVecere(datum));
-        txtGukVeceraNakon.setText(Dnevnik.getGukNakonVecere(datum));
+        try {
+            txtGukNataste.setText(ServiceLocator.getDnevnik().getMjerenjeNatasteNaDatum(datum));
+            txtGukDorucakPrije.setText(ServiceLocator.getDnevnik().getGukPrijeDorucka(datum));
+            txtGukDorucakNakon.setText(ServiceLocator.getDnevnik().getGukNakonDorucka(datum));
+            txtGukRucakPrije.setText(ServiceLocator.getDnevnik().getGukPrijeRucka(datum));
+            txtGukRucakNakon.setText(ServiceLocator.getDnevnik().getGukNakonRucka(datum));
+            txtGukVeceraPrije.setText(ServiceLocator.getDnevnik().getGukPrijeVecere(datum));
+            txtGukVeceraNakon.setText(ServiceLocator.getDnevnik().getGukNakonVecere(datum));
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

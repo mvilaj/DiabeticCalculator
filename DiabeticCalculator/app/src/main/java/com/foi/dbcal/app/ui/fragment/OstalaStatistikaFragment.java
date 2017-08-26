@@ -18,7 +18,7 @@ import java.text.DecimalFormat;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OstalaStatistika extends Fragment {
+public class OstalaStatistikaFragment extends Fragment {
 
     public TextView tvGukNataste;
     public TextView tvGukPrijeObroka;
@@ -27,7 +27,7 @@ public class OstalaStatistika extends Fragment {
     private double ispis2=0;
     private double ispis3 =0;
 
-    public OstalaStatistika() {
+    public OstalaStatistikaFragment() {
         // Required empty public constructor
     }
 

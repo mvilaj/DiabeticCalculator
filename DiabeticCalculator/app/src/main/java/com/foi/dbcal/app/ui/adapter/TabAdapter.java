@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.foi.dbcal.app.ui.fragment.DnevnikFragment;
 import com.foi.dbcal.app.ui.fragment.IzracunFragment;
 import com.foi.dbcal.app.ui.fragment.MjerenjaFragment;
-import com.foi.dbcal.app.ui.fragment.OstalaStatistika;
+import com.foi.dbcal.app.ui.fragment.OstalaStatistikaFragment;
 import com.foi.dbcal.app.ui.fragment.PocetniFragment;
 import com.foi.dbcal.app.ui.fragment.StatisticChart;
 
@@ -40,7 +40,7 @@ public class TabAdapter extends FragmentPagerAdapter {
         }else if (type == 2){
             switch (position) {
                 case 0:
-                    return new OstalaStatistika();
+                    return new OstalaStatistikaFragment();
                 case 1:
                     return new StatisticChart();
                 case 2:
