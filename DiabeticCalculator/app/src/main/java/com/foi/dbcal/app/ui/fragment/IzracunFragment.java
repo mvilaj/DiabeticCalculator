@@ -27,7 +27,8 @@ import com.foi.dbcal.app.ui.preferences.MainActivity;
 import com.foi.dbcal.app.ui.preferences.NamirniceObrokaDialog;
 import com.foi.dbcal.app.ui.preferences.NotificationPublisher;
 import com.foi.dbcal.app.R;
-import com.air.dbcal.app.businessLogic.IzracunInzulina;
+import com.foi.dbcal.connector.ServiceLocator;
+import com.foi.dbcal.connector.ServiceNotFoundException;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.text.ParseException;
@@ -137,7 +138,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
     }
 
     /**
-     * Metoda koja poziva potreben metode iz klase IzracunInzulina
+     * Metoda koja poziva potreben metode iz klase IzracunInzulinaService
      * i prikazuje potrebne informacije korisniku na ekranu.
      */
     private void izracunaj() {
@@ -154,15 +155,25 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
             } else {
                 uneseniUgljikohodrati = Double.parseDouble(etUgljikohidrati.getText().toString());
                 uneseniGuk = Double.parseDouble(etGuk.getText().toString());
-                kolicinaInzulina = IzracunInzulina.getKolicinaInzulinaZaObrok(uneseniUgljikohodrati, uneseniGuk, getActivity());
-                prikaziDialog(kolicinaInzulina);
+                try {
+                    kolicinaInzulina = ServiceLocator.getIzracunInzulina().getKolicinaInzulinaZaObrok(uneseniUgljikohodrati, uneseniGuk, getActivity());
+                    prikaziDialog(kolicinaInzulina);
+                } catch (ServiceNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+                }
             }
         }else {
             if (etGuk.getText().toString().equals("")){
                 Toast.makeText(getActivity(), "Polje guk je obavezno!!", Toast.LENGTH_LONG).show();
             }else{
-                kolicinaInzulina = IzracunInzulina.getKolicinaInzulinaZaObrok(ukupnoUgljikohidrata, uneseniGuk, getActivity());
-                prikaziDialog(kolicinaInzulina);
+                try {
+                    kolicinaInzulina = ServiceLocator.getIzracunInzulina().getKolicinaInzulinaZaObrok(ukupnoUgljikohidrata, uneseniGuk, getActivity());
+                    prikaziDialog(kolicinaInzulina);
+                } catch (ServiceNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+                }
             }
         }
 
