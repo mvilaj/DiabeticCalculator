@@ -203,6 +203,7 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                     etGuk.setText("");
                     etUgljikohidrati.setText("");
                 }else{
+                    uneseniGuk = Double.parseDouble(etGuk.getText().toString());
                     Obrok noviObrok = new Obrok(finalDatumDanas, uneseniGuk, 0.0, ukupnoUgljikohidrata, tipObroka);
                     noviObrok.save();
 
