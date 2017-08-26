@@ -12,13 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.foi.dbcal.app.R;
+import com.foi.dbcal.common.service.Statistika;
 import com.foi.dbcal.statistics.StatisticsFragment;
 
 
 public class StatistikaFragment extends Fragment {
 
-    public StatistikaFragment() {
-    }
+    boolean grafickiPrikaz;
+    Boolean grafickiPrikazSaved;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +44,38 @@ public class StatistikaFragment extends Fragment {
                 .add(R.id.fragment_statistika,statisticsFragment)
                 .commit();
     }
+    private void zamjeniFragment()
+    {
+        StatisticsFragment statisticsFragment= new StatisticsFragment();
+        Bundle bundle=new Bundle();
+        bundle.putBoolean("grafickiPrikaz",grafickiPrikaz);
+        statisticsFragment.setArguments(bundle);
+        FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+        fragmentTransaction
+                .replace(R.id.fragment_statistika,statisticsFragment)
+                .commit();
 
 
+    }
+
+    @Override
+    public void onResume()
+    {
+       super.onResume();
+        if (grafickiPrikazSaved!=null){
+            SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getContext());
+            grafickiPrikaz=sharedPreferences.getBoolean("vrstaStatistike", true);
+            if (grafickiPrikaz!=grafickiPrikazSaved){
+                zamjeniFragment();
+            }
+
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        grafickiPrikazSaved=grafickiPrikaz;
+    }
 }
