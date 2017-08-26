@@ -22,7 +22,7 @@
         android:text="0,0"
         android:textStyle="bold"
         android:textColor="@color/blue"
-        android:textSize="200dp"
+        android:textSize="140dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:id="@+id/tvHBA1C"/>

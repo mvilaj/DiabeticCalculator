@@ -32,15 +32,15 @@ public class TableDataHelper {
         this.tvDatumData = new TextView(con);
         this.tvDatumData.setTextColor(Color.GRAY);
         this.tvDatumData.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        this.tvDatumData.setTextSize(40);
+        this.tvDatumData.setTextSize(30);
         this.tvDatumData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         this.tvDatumData.setPadding(5, 5, 5, 5);
-        this.tvDatumData.setWidth(550);
+        this.tvDatumData.setWidth(600);
 
         this.tvGukData = new TextView(con);
         this.tvGukData.setTextColor(Color.GRAY);
         this.tvGukData.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        this.tvGukData.setTextSize(40);
+        this.tvGukData.setTextSize(30);
         tvGukData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         tvGukData.setPadding(5, 5, 5, 5);
     }
@@ -49,7 +49,7 @@ public class TableDataHelper {
         this.tvDatumHeader = new TextView(conn);
         this.tvDatumHeader.setText("Datum");
         this.tvDatumHeader.setTextColor(ContextCompat.getColor(conn, R.color.blue));
-        this.tvDatumHeader.setTextSize(45);
+        this.tvDatumHeader.setTextSize(35);
         this.tvDatumHeader.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         this.tvDatumHeader.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         this.tvDatumHeader.setPadding(5, 5, 5, 0);
@@ -60,7 +60,7 @@ public class TableDataHelper {
         this.tvGUKHeader .setText("GUK");
         this.tvGUKHeader .setTextColor(ContextCompat.getColor(conn, R.color.blue));
         this.tvGUKHeader .setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        this.tvGUKHeader.setTextSize(45);
+        this.tvGUKHeader.setTextSize(35);
         this.tvGUKHeader .setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         this.tvGUKHeader .setPadding(5, 5, 5, 0);
 
