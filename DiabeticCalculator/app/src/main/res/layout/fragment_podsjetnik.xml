@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.air.foi.diabeticcalculatorapp.Podsjetnik">
+    tools:context="com.air.dbcal.app.com.foi.dbcal.app.ui.preferences.Podsjetnik">
 
     <!-- TODO: Update blank fragment layout -->
 
