@@ -14,7 +14,7 @@ import android.widget.TableRow;
 
 import com.foi.dbcal.common.service.StatistikaPrikazInterface;
 import com.github.mikephil.charting.charts.LineChart;
-
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +27,13 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
     private TableLayout statisticTable;
     private TableRow tableHeader;
     private List<TableRow> listRows;
+    ArrayList<String> gukNataste;
+    ArrayList<String> gukPrije;
+    ArrayList<String> gukNakon;
+    ArrayList<String> datumNataste;
+    ArrayList<String> datumPrije;
+    ArrayList<String> datumNakon;
+
     public StatisticTableFragment() {
         // Required empty public constructor
     }
@@ -36,6 +43,14 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_statistic_table, container, false);
+
+        Bundle bundle = this.getArguments();
+        gukNataste = bundle.getStringArrayList("gukNataste");
+        gukPrije = bundle.getStringArrayList("gukPrije");
+        gukNakon = bundle.getStringArrayList("gukNakon");
+        datumNataste = bundle.getStringArrayList("datumNataste");
+        datumPrije = bundle.getStringArrayList("datumPrije");
+        datumNakon = bundle.getStringArrayList("datumNakon");
 
         initWidgets(v);
         setUpListeners();
@@ -59,7 +74,7 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
                         tableHeader = tdh.getTableHeader(getFragment().getContext());
                         statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                        listRows = tdh.getNatasteTableRows(getFragment().getContext());
+                        listRows = tdh.getNatasteTableRows(getFragment().getContext(),datumNataste,gukNataste);
 
                         for (TableRow tr: listRows) {
                             statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -70,7 +85,7 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
                         tableHeader = tdh.getTableHeader(getFragment().getContext());
                         statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                        listRows = tdh.getPrijeTableRows(getFragment().getContext());
+                        listRows = tdh.getPrijeTableRows(getFragment().getContext(),datumPrije,gukPrije);
 
                         for (TableRow tr: listRows) {
                             statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -81,7 +96,7 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
                         tableHeader = tdh.getTableHeader(getFragment().getContext());
                         statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                        listRows = tdh.getNakonTableRows(getFragment().getContext());
+                        listRows = tdh.getNakonTableRows(getFragment().getContext(),datumNakon,gukNakon);
 
                         for (TableRow tr: listRows) {
                             statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -92,7 +107,7 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
                         tableHeader = tdh.getTableHeader(getFragment().getContext());
                         statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                        listRows = tdh.getNatasteTableRows(getFragment().getContext());
+                        listRows = tdh.getNatasteTableRows(getFragment().getContext(),datumNataste,gukNataste);
 
                         for (TableRow tr: listRows) {
                             statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -108,7 +123,7 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
                 tableHeader = tdh.getTableHeader(getFragment().getContext());
                 statisticTable.addView(tableHeader, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                listRows = tdh.getNatasteTableRows(getFragment().getContext());
+                listRows = tdh.getNatasteTableRows(getFragment().getContext(),datumNataste,gukNataste);
 
                 for (TableRow tr: listRows) {
                     statisticTable.addView(tr, new TableLayout.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));

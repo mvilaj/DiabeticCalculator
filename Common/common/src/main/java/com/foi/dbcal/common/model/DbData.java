@@ -3,6 +3,7 @@ package com.foi.dbcal.common.model;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,4 +79,59 @@ public class DbData {
         return strGukNakonList;
     }
 
+    public static ArrayList<String> getDatumNataste(){
+        final List<OstalaMjerenja> mjerenjaNataste= SQLite.select()
+                .from(OstalaMjerenja.class)
+                .queryList();
+
+        List<Date>datumList=new ArrayList<>();
+
+        for (OstalaMjerenja nataste: mjerenjaNataste)
+            if (nataste.getTipMjerenja().getNaziv().equals("Natašte")){
+                datumList.add(nataste.getDatum());
+            }
+        ArrayList<String> strDatumList = new ArrayList<>();
+        for (Date d: datumList){
+            strDatumList.add(d.toString());
+        }
+
+        return strDatumList;
+    }
+
+    public static  ArrayList<String> getDatumPrije(){
+        final List<Obrok> mjerenjaPrije= SQLite.select()
+                .from(Obrok.class)
+                .queryList();
+
+        List<Date> datumList = new ArrayList<>();
+
+        for (Obrok prije: mjerenjaPrije )
+            if(prije.getGukPrije()!=0.0){
+                datumList.add(prije.getDatum());
+            }
+        ArrayList<String> strDatumList = new ArrayList<>();
+        for (Date d: datumList){
+            strDatumList.add(d.toString());
+        }
+
+        return strDatumList;
+    }
+
+    public static  ArrayList<String> getDatumNakon(){
+        final List<Obrok> mjerenjaNakon= SQLite.select()
+                .from(Obrok.class).queryList();
+
+        List<Date> datumList = new ArrayList<>();
+
+        for (Obrok nakon: mjerenjaNakon )
+            if(nakon.getGukNakon()!=0.0){
+                datumList.add(nakon.getDatum());
+            }
+        ArrayList<String> strDatumList = new ArrayList<>();
+        for (Date d: datumList){
+            strDatumList.add(d.toString());
+        }
+
+        return strDatumList;
+    }
 }

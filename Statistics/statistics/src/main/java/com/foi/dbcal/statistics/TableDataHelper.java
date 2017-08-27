@@ -1,16 +1,17 @@
 package com.foi.dbcal.statistics;
 
+import java.util.Date;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.widget.TableRow;
 import android.widget.TextView;
-
+import java.text.ParseException;
 import com.foi.dbcal.common.model.Obrok;
 import com.foi.dbcal.common.model.OstalaMjerenja;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-
+import java.util.Iterator;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,94 +74,112 @@ public class TableDataHelper {
         return  trHeader;
     }
 
-    public List<TableRow> getNatasteTableRows(Context conn) {
+    public List<TableRow> getNatasteTableRows(Context conn, ArrayList<String> datumNataste, ArrayList<String> gukNataste) {
 
         List<TableRow> listaRows = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
+        Format targetFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-        Format formatter = new SimpleDateFormat("dd.MM.yyyy");
+        final ArrayList<String> mjerenjaNatasteDatum = datumNataste;
+        final ArrayList<String> mjerenjaNatasteGuk = gukNataste;
 
-        final List<OstalaMjerenja> mjerenjaNataste= SQLite.select()
-                .from(OstalaMjerenja.class)
-                .queryList();
+        Iterator aIterator = mjerenjaNatasteDatum.iterator();
+        Iterator bIterator = mjerenjaNatasteGuk.iterator();
 
-        for (OstalaMjerenja nataste: mjerenjaNataste )
-            if (nataste.getTipMjerenja().getNaziv().equals("Natašte")) {
+        while (aIterator.hasNext() && bIterator.hasNext()) {
+            trData = new TableRow(conn);
+            trData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                trData = new TableRow(conn);
-                trData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-
-                setDataControls(conn);
-
-                this.tvDatumData.setText( formatter.format(nataste.getDatum()));
-                trData.addView(this.tvDatumData);
-
-                this.tvGukData.setText(String.valueOf(nataste.getGuk()));
-                trData.addView(this.tvGukData);
-
-                listaRows.add(trData);
+            setDataControls(conn);
+            Date date;
+            try {
+                date = dateFormat.parse(String.valueOf(aIterator.next()));
+            } catch (ParseException e) {
+                e.printStackTrace();date=new Date();
             }
+            this.tvDatumData.setText(targetFormat.format(date));
+            trData.addView(this.tvDatumData);
 
+            this.tvGukData.setText(String.valueOf(bIterator.next()));
+            trData.addView(this.tvGukData);
+
+            listaRows.add(trData);
+        }
         return listaRows;
     }
 
-    public List<TableRow> getPrijeTableRows(Context conn) {
+    public List<TableRow> getPrijeTableRows(Context conn, ArrayList<String> datumPrije, ArrayList<String> gukPrije) {
 
         List<TableRow> listaRows = new ArrayList<>();
-        Format formatter = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
+        Format targetFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-        final List<Obrok> mjerenjaNakon= SQLite.select()
-                .from(Obrok.class).queryList();
+        final ArrayList<String> mjerenjaPrijeDatum = datumPrije;
+        final ArrayList<String> mjerenjaPrijeGuk = gukPrije;
 
-        for (Obrok nakon: mjerenjaNakon ) {
+        Iterator aIterator = mjerenjaPrijeDatum.iterator();
+        Iterator bIterator = mjerenjaPrijeGuk.iterator();
 
-            if(nakon.getGukPrije()!=0.0){
+        while (aIterator.hasNext() && bIterator.hasNext()) {
+            trData = new TableRow(conn);
+            trData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                trData = new TableRow(conn);
-                trData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            setDataControls(conn);
 
-                setDataControls(conn);
-
-                this.tvDatumData.setText(formatter.format(nakon.getDatum()));
-                trData.addView(this.tvDatumData);
-
-                this.tvGukData.setText(String.valueOf(nakon.getGukPrije()));
-                trData.addView(this.tvGukData);
-
-                listaRows.add(trData);
+            Date date;
+            try {
+                date = dateFormat.parse(String.valueOf(aIterator.next()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                date=new Date();
             }
-        }
 
+            this.tvDatumData.setText(targetFormat.format(date));
+            trData.addView(this.tvDatumData);
+
+            this.tvGukData.setText(String.valueOf(bIterator.next()));
+            trData.addView(this.tvGukData);
+
+            listaRows.add(trData);
+        }
         return listaRows;
     }
 
-    public List<TableRow> getNakonTableRows(Context conn) {
-
-        Format formatter = new SimpleDateFormat("dd.MM.yyyy");
+    public List<TableRow> getNakonTableRows(Context conn, ArrayList<String> datumNakon, ArrayList<String> gukNakon) {
 
         List<TableRow> listaRows = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
+        Format targetFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-        final List<Obrok> mjerenjaNakon= SQLite.select()
-                .from(Obrok.class).queryList();
+        final ArrayList<String> mjerenjaNakonDatum = datumNakon;
+        final ArrayList<String> mjerenjaNakonGuk = gukNakon;
 
-        for (Obrok nakon: mjerenjaNakon ) {
+        Iterator aIterator = mjerenjaNakonDatum.iterator();
+        Iterator bIterator = mjerenjaNakonGuk.iterator();
 
-            if(nakon.getGukNakon()!=0.0){
+        while (aIterator.hasNext() && bIterator.hasNext()) {
 
-                trData = new TableRow(conn);
-                trData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            trData = new TableRow(conn);
+            trData.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-                setDataControls(conn);
+            setDataControls(conn);
 
-                this.tvDatumData.setText(formatter.format(nakon.getDatum()));
-                trData.addView(this.tvDatumData);
-
-                this.tvGukData.setText(String.valueOf(nakon.getGukNakon()));
-                trData.addView(this.tvGukData);
-
-                listaRows.add(trData);
+            Date date;
+            try {
+                date = dateFormat.parse(String.valueOf(aIterator.next()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                date=new Date();
             }
-        }
 
+            this.tvDatumData.setText(targetFormat.format(date));
+            trData.addView(this.tvDatumData);
+
+            this.tvGukData.setText(String.valueOf(bIterator.next()));
+            trData.addView(this.tvGukData);
+
+            listaRows.add(trData);
+        }
         return listaRows;
     }
 

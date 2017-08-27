@@ -48,6 +48,9 @@ public class StatistikaFragment extends Fragment {
             bundle.putStringArrayList("gukNataste", DbData.getGukNataste());
             bundle.putStringArrayList("gukPrije", DbData.getGukPrije());
             bundle.putStringArrayList("gukNakon",DbData.getGukNakon());
+            bundle.putStringArrayList("datumNataste",DbData.getDatumNataste());
+            bundle.putStringArrayList("datumPrije",DbData.getDatumPrije());
+            bundle.putStringArrayList("datumNakon",DbData.getDatumNakon());
 
             statisticsFragment.setArguments(bundle);
 
@@ -70,6 +73,9 @@ public class StatistikaFragment extends Fragment {
             bundle.putStringArrayList("gukNataste", DbData.getGukNataste());
             bundle.putStringArrayList("gukPrije", DbData.getGukPrije());
             bundle.putStringArrayList("gukNakon",DbData.getGukNakon());
+            bundle.putStringArrayList("datumNataste",DbData.getDatumNataste());
+            bundle.putStringArrayList("datumPrije",DbData.getDatumPrije());
+            bundle.putStringArrayList("datumNakon",DbData.getDatumNakon());
 
             statisticsFragment.setArguments(bundle);
 

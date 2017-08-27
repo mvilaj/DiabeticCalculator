@@ -20,6 +20,9 @@ public class StatisticsFragment extends Fragment {
     ArrayList<String> gukNataste;
     ArrayList<String> gukPrije;
     ArrayList<String> gukNakon;
+    ArrayList<String> datumNataste;
+    ArrayList<String> datumPrije;
+    ArrayList<String> datumNakon;
 
     public StatisticsFragment() {
     }
@@ -40,6 +43,9 @@ public class StatisticsFragment extends Fragment {
             gukNataste = bundle.getStringArrayList("gukNataste");
             gukPrije = bundle.getStringArrayList("gukPrije");
             gukNakon = bundle.getStringArrayList("gukNakon");
+            datumNataste = bundle.getStringArrayList("datumNataste");
+            datumPrije = bundle.getStringArrayList("datumPrije");
+            datumNakon = bundle.getStringArrayList("datumNakon");
         }
 
         StatistikaPrikazInterface statistikaPrikaz=null;
@@ -54,6 +60,13 @@ public class StatisticsFragment extends Fragment {
             statistikaPrikaz = statisticChartFragment;
         }else{
             StatisticTableFragment statisticTableFragment = new StatisticTableFragment();
+            bundle1.putStringArrayList("gukNataste",gukNataste);
+            bundle1.putStringArrayList("gukPrije",gukPrije);
+            bundle1.putStringArrayList("gukNakon",gukNakon);
+            bundle1.putStringArrayList("datumNataste",datumNataste);
+            bundle1.putStringArrayList("datumPrije",datumPrije);
+            bundle1.putStringArrayList("datumNakon",datumNakon);
+            statisticTableFragment.setArguments(bundle1);
 
             statistikaPrikaz = statisticTableFragment;
         }
