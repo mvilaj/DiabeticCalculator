@@ -224,6 +224,11 @@ public class IzracunFragment extends Fragment implements NamirniceObrokaDialog.D
                         no.save();
                     }
                 }
+                etGuk.setText("");
+                etUgljikohidrati.setText("");
+                cbPoznatiUgljikohidrati.setChecked(false);
+                listaNamirnica.clear();
+                btnIzracunaj.requestFocus();
 
                 NotificationPublisher.scheduleNotification(getContext(),1,NotificationPublisher.getNotification(getContext(),MainActivity.class,"Podsjetnik za mjerenje glukoze","Izmjerite vrijednost glukoze.","UnosMjerenja"),2*60*60);
             }
