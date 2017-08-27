@@ -28,6 +28,10 @@ public class TableDataHelper {
     public TextView tvDatumHeader, tvGUKHeader, tvDatumData, tvGukData;
 
 
+    /**
+     * Metoda koja inicijalizira kontrole potreben za tablični prikaz
+     * @param con kontekst aplikacija
+     */
     public  void setDataControls(Context con){
 
         this.tvDatumData = new TextView(con);
@@ -46,6 +50,11 @@ public class TableDataHelper {
         tvGukData.setPadding(5, 5, 5, 5);
     }
 
+    /**
+     * Metoda vraća Header tablice koju treba prikazati
+     * @param conn kontekst aplikacije
+     * @return
+     */
     public TableRow getTableHeader(Context conn) {
         this.tvDatumHeader = new TextView(conn);
         this.tvDatumHeader.setText("Datum");
@@ -74,6 +83,13 @@ public class TableDataHelper {
         return  trHeader;
     }
 
+    /**
+     * Metoda vraca retke za tablicu
+     * @param conn aplikacijski kontekst
+     * @param datumNataste datumi mjerenja
+     * @param gukNataste vrijednsoti mjerenja
+     * @return
+     */
     public List<TableRow> getNatasteTableRows(Context conn, ArrayList<String> datumNataste, ArrayList<String> gukNataste) {
 
         List<TableRow> listaRows = new ArrayList<>();
@@ -108,6 +124,13 @@ public class TableDataHelper {
         return listaRows;
     }
 
+    /**
+     * Metoda vraca redtke za tablicu vrijednsoti prije obroka
+     * @param conn kontekst aplikacije
+     * @param datumPrije lista datuma mjerenja
+     * @param gukPrije lista vriejdnsoti mjerenja
+     * @return
+     */
     public List<TableRow> getPrijeTableRows(Context conn, ArrayList<String> datumPrije, ArrayList<String> gukPrije) {
 
         List<TableRow> listaRows = new ArrayList<>();
@@ -145,6 +168,13 @@ public class TableDataHelper {
         return listaRows;
     }
 
+    /**
+     * Metoda vraća listu redaka za tablicu vrijednsoti nakon obroka
+     * @param conn kontekst aplikacije
+     * @param datumNakon lista datuma mjerenja
+     * @param gukNakon lista vrijednsoti mjerenja
+     * @return
+     */
     public List<TableRow> getNakonTableRows(Context conn, ArrayList<String> datumNakon, ArrayList<String> gukNakon) {
 
         List<TableRow> listaRows = new ArrayList<>();

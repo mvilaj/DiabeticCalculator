@@ -35,6 +35,10 @@ public class StatisticsFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Metoda prikazuje fragment
+     */
+
     private void prikaziFragment() {
 
         Bundle bundle = this.getArguments();
