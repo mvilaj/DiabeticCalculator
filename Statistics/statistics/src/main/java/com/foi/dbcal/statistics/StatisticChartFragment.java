@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import com.foi.dbcal.common.service.StatistikaPrikazInterface;
 import com.github.mikephil.charting.charts.LineChart;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +23,9 @@ public class StatisticChartFragment extends Fragment implements StatistikaPrikaz
 
     private Spinner spStatisticType;
     public LineChart linearChart;
+    ArrayList<String> gukNataste;
+    ArrayList<String> gukPrije;
+    ArrayList<String> gukNakon;
 
     public StatisticChartFragment() {
         // Required empty public constructor
@@ -31,6 +36,11 @@ public class StatisticChartFragment extends Fragment implements StatistikaPrikaz
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_statistic_chart, container, false);
+
+        Bundle bundle = this.getArguments();
+        gukNataste = bundle.getStringArrayList("gukNataste");
+        gukPrije = bundle.getStringArrayList("gukPrije");
+        gukNakon = bundle.getStringArrayList("gukNakon");
 
         initWidgets(v);
         setUpListeners();
@@ -51,19 +61,19 @@ public class StatisticChartFragment extends Fragment implements StatistikaPrikaz
                 switch (i){
                     case 0:
                         linearChart.clear();
-                        linearChart.setData(StatisticChartData.getNatasteChartData());
+                        linearChart.setData(StatisticChartData.getNatasteChartData(gukNataste));
                         break;
                     case 1:
                         linearChart.clear();
-                        linearChart.setData(StatisticChartData.getBeforeMealChartData());
+                        linearChart.setData(StatisticChartData.getBeforeMealChartData(gukPrije));
                         break;
                     case 2:
                         linearChart.clear();
-                        linearChart.setData(StatisticChartData.getAfterMealChartData());
+                        linearChart.setData(StatisticChartData.getAfterMealChartData(gukNakon));
                         break;
                     default:
                         linearChart.clear();
-                        linearChart.setData(StatisticChartData.getNatasteChartData());
+                        linearChart.setData(StatisticChartData.getNatasteChartData(gukNataste));
                         break;
                 }
 
@@ -72,7 +82,7 @@ public class StatisticChartFragment extends Fragment implements StatistikaPrikaz
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 linearChart.clear();
-                linearChart.setData(StatisticChartData.getNatasteChartData());
+                linearChart.setData(StatisticChartData.getNatasteChartData(gukNataste));
             }
         });
     }

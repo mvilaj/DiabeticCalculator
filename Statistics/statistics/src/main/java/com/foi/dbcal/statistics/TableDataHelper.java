@@ -154,7 +154,7 @@ public class TableDataHelper {
                 this.tvDatumData.setText(formatter.format(nakon.getDatum()));
                 trData.addView(this.tvDatumData);
 
-                this.tvGukData.setText(String.valueOf(nakon.getGukPrije()));
+                this.tvGukData.setText(String.valueOf(nakon.getGukNakon()));
                 trData.addView(this.tvGukData);
 
                 listaRows.add(trData);

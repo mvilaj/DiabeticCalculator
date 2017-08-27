@@ -23,23 +23,18 @@ public class StatisticChartData {
      * za grafički prikaz GUKA natašte
      * @return LIneData za GUK natašte
      */
-    public static LineData getNatasteChartData(){
+    public static LineData getNatasteChartData(ArrayList<String> gukNataste){
 
-        final List<OstalaMjerenja> mjerenjaNataste= SQLite.select()
-                .from(OstalaMjerenja.class)
-                .queryList();
+        final ArrayList<String> mjerenjaNataste = gukNataste;
 
         List<Entry> yValues = new ArrayList<>();
         List<Entry> yValesNormal = new ArrayList<>();
 
         int i = 1;
-        for (OstalaMjerenja nataste: mjerenjaNataste ) {
-            if (nataste.getTipMjerenja().getNaziv().equals("Natašte")){
-                yValesNormal.add(new Entry(i, 6,0));
-                yValues.add(new Entry(i, (float) nataste.getGuk()));
-                i++;
-            }
-
+        for (String nataste: mjerenjaNataste){
+            yValesNormal.add(new Entry(i, 6,0));
+            yValues.add(new Entry(i, Float.parseFloat(nataste)));
+            i++;
         }
 
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
@@ -64,23 +59,19 @@ public class StatisticChartData {
      * za grafički prikaz GUKA prije oborka
      * @return LineData za GUK prije obroka
      */
-    public static LineData getBeforeMealChartData(){
+    public static LineData getBeforeMealChartData(ArrayList<String> gukPrije){
 
-        final List<Obrok> mjerenjaPrije = SQLite.select()
-                .from(Obrok.class).queryList();
+        final ArrayList<String> mjerenjaPrije = gukPrije;
 
         int duzina = mjerenjaPrije.size();
         List<Entry> yValues = new ArrayList<>();
         List<Entry> yValesNormal = new ArrayList<>();
 
         int i = 1;
-        for (Obrok prije: mjerenjaPrije ) {
-
-            if(prije.getGukPrije()!=0.0){
-                yValesNormal.add(new Entry(i, 7,0));
-                yValues.add(new Entry(i, (float) prije.getGukPrije()));
-                i++;
-            }
+        for (String prije: mjerenjaPrije ) {
+            yValesNormal.add(new Entry(i, 7,0));
+            yValues.add(new Entry(i, Float.parseFloat(prije)));
+            i++;
         }
 
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
@@ -105,22 +96,18 @@ public class StatisticChartData {
      * za grafički prikaz GUKA nakon oborka
      * @return LIneData za GUK nakon obroka
      */
-    public static LineData getAfterMealChartData(){
+    public static LineData getAfterMealChartData(ArrayList<String> gukNakon){
 
-        final List<Obrok> mjerenjaNakon= SQLite.select()
-                .from(Obrok.class).queryList();
+        final ArrayList<String> mjerenjaNakon = gukNakon;
 
         List<Entry> yValues = new ArrayList<>();
         List<Entry> yValesNormal = new ArrayList<>();
 
         int i = 1;
-        for (Obrok nakon: mjerenjaNakon ) {
-
-            if(nakon.getGukNakon()!=0.0){
-                yValesNormal.add(new Entry(i, 10,0));
-                yValues.add(new Entry(i, (float) nakon.getGukNakon()));
-                i++;
-            }
+        for (String nakon: mjerenjaNakon ) {
+            yValesNormal.add(new Entry(i, 10,0));
+            yValues.add(new Entry(i, Float.parseFloat(nakon)));
+            i++;
         }
 
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();

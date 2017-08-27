@@ -11,16 +11,17 @@ import android.view.ViewGroup;
 
 import com.foi.dbcal.common.service.StatistikaPrikazInterface;
 
+import java.util.ArrayList;
+
 
 public class StatisticsFragment extends Fragment {
 
     private boolean grafickiPrikaz;
+    ArrayList<String> gukNataste;
+    ArrayList<String> gukPrije;
+    ArrayList<String> gukNakon;
 
     public StatisticsFragment() {
-        Bundle bundle = this.getArguments();
-        if(bundle!=null) {
-            grafickiPrikaz = bundle.getBoolean("grafickiPrikaz",true);
-        }
     }
 
     @Override
@@ -36,13 +37,25 @@ public class StatisticsFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if(bundle!=null) {
             grafickiPrikaz = bundle.getBoolean("grafickiPrikaz",true);
+            gukNataste = bundle.getStringArrayList("gukNataste");
+            gukPrije = bundle.getStringArrayList("gukPrije");
+            gukNakon = bundle.getStringArrayList("gukNakon");
         }
 
         StatistikaPrikazInterface statistikaPrikaz=null;
+        Bundle bundle1 = new Bundle();
         if(grafickiPrikaz){
-            statistikaPrikaz = new StatisticChartFragment();
+            StatisticChartFragment statisticChartFragment = new StatisticChartFragment();
+            bundle1.putStringArrayList("gukNataste",gukNataste);
+            bundle1.putStringArrayList("gukPrije",gukPrije);
+            bundle1.putStringArrayList("gukNakon",gukNakon);
+            statisticChartFragment.setArguments(bundle1);
+
+            statistikaPrikaz = statisticChartFragment;
         }else{
-            statistikaPrikaz = new StatisticTableFragment();
+            StatisticTableFragment statisticTableFragment = new StatisticTableFragment();
+
+            statistikaPrikaz = statisticTableFragment;
         }
 
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();

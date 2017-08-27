@@ -1,5 +1,7 @@
 package com.foi.dbcal.connector;
 
+import android.support.v4.app.Fragment;
+
 import com.foi.dbcal.common.service.Dnevnik;
 import com.foi.dbcal.common.service.IzracunInzulina;
 import com.foi.dbcal.common.service.Statistika;
@@ -60,6 +62,16 @@ public class ServiceLocator {
         } catch (Exception e){
             e. printStackTrace();
             return false;
+        }
+    }
+
+    public static Fragment getStatisticsFragment() throws ServiceNotFoundException{
+        try{
+            Class c = Class.forName("com.foi.dbcal.statistics.StatisticsFragment");
+            return (Fragment) c.newInstance();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new ServiceNotFoundException("Ne mogu locirati servis");
         }
     }
 }

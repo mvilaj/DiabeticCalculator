@@ -10,9 +10,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
+import com.foi.dbcal.common.model.DbData;
 import com.foi.dbcal.common.service.Statistika;
+import com.foi.dbcal.connector.ServiceLocator;
+import com.foi.dbcal.connector.ServiceNotFoundException;
 import com.foi.dbcal.statistics.StatisticsFragment;
 
 
@@ -32,30 +36,51 @@ public class StatistikaFragment extends Fragment {
     }
 
     private void prikaziFragment() {
-
+        //Get preference setting vrstaStatistike and send it to StatisticsFragment
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        boolean grafickiPrikaz= sp.getBoolean("vrstaStatistike", true);
-        StatisticsFragment statisticsFragment = new StatisticsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("grafickiPrikaz",grafickiPrikaz);
-        statisticsFragment.setArguments(bundle);
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction
-                .add(R.id.fragment_statistika,statisticsFragment)
-                .commit();
+        grafickiPrikaz = sp.getBoolean("vrstaStatistike", true);
+
+        Fragment statisticsFragment = null;
+        try {
+            statisticsFragment = ServiceLocator.getStatisticsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("grafickiPrikaz",grafickiPrikaz);
+            bundle.putStringArrayList("gukNataste", DbData.getGukNataste());
+            bundle.putStringArrayList("gukPrije", DbData.getGukPrije());
+            bundle.putStringArrayList("gukNakon",DbData.getGukNakon());
+
+            statisticsFragment.setArguments(bundle);
+
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction
+                    .add(R.id.fragment_statistika,statisticsFragment)
+                    .commit();
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
     }
-    private void zamjeniFragment()
+    private void zamijeniFragment()
     {
-        StatisticsFragment statisticsFragment= new StatisticsFragment();
-        Bundle bundle=new Bundle();
-        bundle.putBoolean("grafickiPrikaz",grafickiPrikaz);
-        statisticsFragment.setArguments(bundle);
-        FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-        fragmentTransaction
-                .replace(R.id.fragment_statistika,statisticsFragment)
-                .commit();
+        Fragment statisticsFragment = null;
+        try {
+            statisticsFragment = ServiceLocator.getStatisticsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("grafickiPrikaz",grafickiPrikaz);
+            bundle.putStringArrayList("gukNataste", DbData.getGukNataste());
+            bundle.putStringArrayList("gukPrije", DbData.getGukPrije());
+            bundle.putStringArrayList("gukNakon",DbData.getGukNakon());
 
+            statisticsFragment.setArguments(bundle);
 
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction
+                    .replace(R.id.fragment_statistika,statisticsFragment)
+                    .commit();
+        } catch (ServiceNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"Modul nedostupan",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -66,7 +91,7 @@ public class StatistikaFragment extends Fragment {
             SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getContext());
             grafickiPrikaz=sharedPreferences.getBoolean("vrstaStatistike", true);
             if (grafickiPrikaz!=grafickiPrikazSaved){
-                zamjeniFragment();
+                zamijeniFragment();
             }
 
         }
