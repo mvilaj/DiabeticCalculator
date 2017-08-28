@@ -44,14 +44,6 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_statistic_table, container, false);
 
-        Bundle bundle = this.getArguments();
-        gukNataste = bundle.getStringArrayList("gukNataste");
-        gukPrije = bundle.getStringArrayList("gukPrije");
-        gukNakon = bundle.getStringArrayList("gukNakon");
-        datumNataste = bundle.getStringArrayList("datumNataste");
-        datumPrije = bundle.getStringArrayList("datumPrije");
-        datumNakon = bundle.getStringArrayList("datumNakon");
-
         initWidgets(v);
         setUpListeners();
 
@@ -140,5 +132,16 @@ public class StatisticTableFragment extends Fragment implements StatistikaPrikaz
     @Override
     public Fragment getFragment() {
         return this;
+    }
+
+    @Override
+    public void getData(Bundle bundle) {
+        gukNakon = bundle.getStringArrayList("gukNakon");
+        gukPrije = bundle.getStringArrayList("gukPrije");
+        gukNataste = bundle.getStringArrayList("gukNataste");
+
+        datumNataste = bundle.getStringArrayList("datumNataste");
+        datumPrije = bundle.getStringArrayList("datumPrije");
+        datumNakon = bundle.getStringArrayList("datumNakon");
     }
 }

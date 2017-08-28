@@ -32,15 +32,13 @@ public class StatisticChartFragment extends Fragment implements StatistikaPrikaz
     }
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_statistic_chart, container, false);
 
-        Bundle bundle = this.getArguments();
-        gukNataste = bundle.getStringArrayList("gukNataste");
-        gukPrije = bundle.getStringArrayList("gukPrije");
-        gukNakon = bundle.getStringArrayList("gukNakon");
 
         initWidgets(v);
         setUpListeners();
@@ -96,4 +94,12 @@ public class StatisticChartFragment extends Fragment implements StatistikaPrikaz
     public Fragment getFragment() {
         return this;
     }
+
+    @Override
+    public void getData(Bundle bundle) {
+        gukNakon = bundle.getStringArrayList("gukNakon");
+        gukPrije = bundle.getStringArrayList("gukPrije");
+        gukNataste = bundle.getStringArrayList("gukNataste");
+    }
+
 }

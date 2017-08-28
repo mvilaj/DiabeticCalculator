@@ -40,39 +40,22 @@ public class StatisticsFragment extends Fragment {
      */
 
     private void prikaziFragment() {
-
         Bundle bundle = this.getArguments();
-        if(bundle!=null) {
-            grafickiPrikaz = bundle.getBoolean("grafickiPrikaz",true);
-            gukNataste = bundle.getStringArrayList("gukNataste");
-            gukPrije = bundle.getStringArrayList("gukPrije");
-            gukNakon = bundle.getStringArrayList("gukNakon");
-            datumNataste = bundle.getStringArrayList("datumNataste");
-            datumPrije = bundle.getStringArrayList("datumPrije");
-            datumNakon = bundle.getStringArrayList("datumNakon");
-        }
 
         StatistikaPrikazInterface statistikaPrikaz=null;
+
         Bundle bundle1 = new Bundle();
+        grafickiPrikaz = bundle.getBoolean("grafickiPrikaz");
         if(grafickiPrikaz){
-            StatisticChartFragment statisticChartFragment = new StatisticChartFragment();
-            bundle1.putStringArrayList("gukNataste",gukNataste);
-            bundle1.putStringArrayList("gukPrije",gukPrije);
-            bundle1.putStringArrayList("gukNakon",gukNakon);
-            statisticChartFragment.setArguments(bundle1);
+            statistikaPrikaz = new StatisticChartFragment();
+            statistikaPrikaz.getData(bundle);
 
-            statistikaPrikaz = statisticChartFragment;
+
         }else{
-            StatisticTableFragment statisticTableFragment = new StatisticTableFragment();
-            bundle1.putStringArrayList("gukNataste",gukNataste);
-            bundle1.putStringArrayList("gukPrije",gukPrije);
-            bundle1.putStringArrayList("gukNakon",gukNakon);
-            bundle1.putStringArrayList("datumNataste",datumNataste);
-            bundle1.putStringArrayList("datumPrije",datumPrije);
-            bundle1.putStringArrayList("datumNakon",datumNakon);
-            statisticTableFragment.setArguments(bundle1);
+            statistikaPrikaz = new StatisticTableFragment();
+            statistikaPrikaz.getData(bundle);
 
-            statistikaPrikaz = statisticTableFragment;
+
         }
 
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();

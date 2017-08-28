@@ -9,4 +9,5 @@ public interface Statistika {
     public double prosjekGukNataste ();
     public double prosjekGukPrijeObroka();
     public double prosjekGukNakonObroka();
+
 }

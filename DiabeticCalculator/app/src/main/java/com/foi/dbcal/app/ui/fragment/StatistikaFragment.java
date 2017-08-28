@@ -1,8 +1,6 @@
 package com.foi.dbcal.app.ui.fragment;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -14,10 +12,9 @@ import android.widget.Toast;
 
 import com.foi.dbcal.app.R;
 import com.foi.dbcal.common.model.DbData;
-import com.foi.dbcal.common.service.Statistika;
+//import com.foi.dbcal.common.service.Statistika;
 import com.foi.dbcal.connector.ServiceLocator;
 import com.foi.dbcal.connector.ServiceNotFoundException;
-import com.foi.dbcal.statistics.StatisticsFragment;
 
 
 public class StatistikaFragment extends Fragment {
